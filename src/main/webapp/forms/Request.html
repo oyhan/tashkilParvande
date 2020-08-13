@@ -1,0 +1,559 @@
+﻿<form name="customerForm" role="form">
+
+    <script cam-script type="text/form-script">
+
+        var fileInputs = $("[type='file']");
+        
+        
+        function flagFileUpload() {
+            var hasFile = true;
+            fileInputs.each(function(i,file){
+            
+                 hasFile = $(file).get(0).files.length > 0 && hasFile;
+                    
+                })
+             return hasFile;
+          }
+
+        camForm.on('submit', function(evt) {
+            var hasFile = flagFileUpload();
+      
+            // prevent submit if user has not provided a file
+            if(!hasFile) {
+
+                alert("لطفا همه مدارک را بارگذاری کنید");
+            }
+            evt.submitPrevented = !hasFile;
+          });
+
+
+          
+
+
+        $scope.open = function($event,param) {
+            
+            $event.preventDefault();
+            $event.stopPropagation();
+            switch (param) {
+                case 1 :
+                $scope.drivingLicenseIssueDateOpen = true
+                break;
+                case 2 :
+                $scope.firstDrivingTrafficLicenseIssueDate = true
+                break;
+                default: 
+                $scope.dateFieldOpened = true;
+
+
+            }
+            
+          };
+
+          $scope.dateFormatter = function(value){
+              
+
+          }
+
+    // angular form works on scope object
+    var RequesterModel = $scope.RequesterModel = {
+        
+    };
+
+    
+    
+    /**
+     * cam form lifecycle hooks
+    */
+	
+      camForm.on('form-loaded', function() {
+
+      // declare variable 'RequesterModel' incuding metadata for serialization
+      camForm.variableManager.createVariable({
+        name: 'RequesterModel',
+        type: 'Object',
+        valueInfo: {
+            serializationDataFormat: 'application/json',
+            objectTypeName : 'com.gset.kish.TashkilParvande.Models.RequesterModel'
+          },
+        value: RequesterModel,
+        
+      });
+      camForm.on('variables-fetched', function() {
+      // after the variables are fetched, bind the value of RequesterModel to a angular
+      // scope value such that the form can work on it
+      //$scope.UserData_Variable = camForm.variableManager.variable('UserData_Variable').value;
+	  //$scope.RequesterModel_Variable = camForm.variableManager.variable('RequesterModel_Variable').value;
+     });
+
+	
+
+     
+	  
+    });
+    
+    camForm.on('submit', function() {
+        // remove '$$hashKey' properties from address objects
+        //angular.forEach(RequesterModel.addresses, function(addr) {
+         // delete addr.$$hashKey;
+        //});
+        //$scope.RequesterModel.UserName=$('#UserName').find(":selected").text();
+        console.log('RequesterModel: ', RequesterModel);
+      });
+
+
+
+    
+
+    </script>
+
+
+    >
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-xs-12 ">
+            <div class="panel panel-primary">
+                <div class="panel-heading">مشخصات خودرو</div>
+                <div class="panel-body">
+                    <div class="col-lg-6 col-md-6 col-xs-12 ">
+                        <div class="form-group">
+                            <label class="radio-inline">
+                                <input type="radio" name="vehicleType" ng-model="RequesterModel.vehicleType"
+                                    id="inlineCheckbox1" value="تاکسی"> تاکسی
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="vehicleType" ng-model="RequesterModel.vehicleType"
+                                    id="inlineCheckbox2" value="مینی بوس"> مینی بوس
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="vehicleType" ng-model="RequesterModel.vehicleType"
+                                    id="inlineCheckbox3" value="هایس"> هایس
+                            </label>
+
+                            <label class="checkbox-inline">
+                                <input type="radio" name="vehicleType" ng-model="RequesterModel.vehicleType"
+                                    id="inlineCheckbox3" value="کامیونت"> کامیونت
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-xs-12 ">
+                        <div class="form-group">
+                            <label class="control-label" for="UserID">شماره پلاک</label>
+                            <div class="controls">
+                                <input cam-variable-type="Integer" id="plateNumber" class="form-control" type="text"
+                                    required ng-model="RequesterModel.plateNumber" ng-model-options="{debounce: 500}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-12 ">
+                        <div class="form-group">
+                            <label class="control-label" for="code">کد</label>
+                            <div class="controls">
+                                <input id="code" class="form-control" type="text" required cam-variable-type="Integer"
+                                    ng-model="RequesterModel.code" ng-model-options="{debounce: 500}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-12 ">
+                        <div class="form-group">
+                            <label class="control-label" for="agancy">آژانس</label>
+                            <div class="controls">
+                                <input id="agancy" class="form-control" type="text" required
+                                    ng-model="RequesterModel.agancy" ng-model-options="{debounce: 500}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-12 ">
+                        <div class="form-group">
+                            <label class="control-label" for="idCode">کد شناسایی</label>
+                            <div class="controls">
+                                <input id="idCode" class="form-control" type="text" required cam-variable-type="Integer"
+                                    ng-model="RequesterModel.idCode" ng-model-options="{debounce: 500}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-xs-12 ">
+                        <div class="form-group">
+                            <label class="control-label" for="vehicleType">نوع خودرو عمومی</label>
+                            <div class="controls">
+                                <input id="vehicleType" class="form-control" type="text" required
+                                    ng-model="RequesterModel.vehicleType" ng-model-options="{debounce: 500}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-12 ">
+                        <div class="form-group">
+                            <label class="control-label" for="vehicleYear">سال تولید خودرو</label>
+                            <div class="controls">
+                                <input id="vehicleYear" class="form-control" type="text" required
+                                    cam-variable-type="Integer" ng-model="RequesterModel.vehicleYear"
+                                    ng-model-options="{debounce: 500}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-xs-12 ">
+                        <div class="form-group">
+                            <label class="radio-inline">
+                                <input type="radio" name="vehicleOwnerType" ng-model="RequesterModel.vehicleOwnerType"
+                                    id="inlineCheckbox1" value="مالک شش دانگ"> مالک شش دانگ
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="vehicleOwnerType" ng-model="RequesterModel.vehicleOwnerType"
+                                    id="inlineCheckbox2" value="مالک سه دانگ"> مالک سه دانگ
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="vehicleOwnerType" ng-model="RequesterModel.vehicleOwnerType"
+                                    id="inlineCheckbox3" value="راننده کمکی"> راننده کمکی
+                            </label>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-xs-12 ">
+            <div class="panel panel-info">
+                <div class="panel-heading">مشخصات راننده</div>
+                <div class="panel-body">
+
+
+
+
+
+                    <div class="col-lg-2 col-md-2 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="name" cam-variable-type="String" placeholder="نام" class="form-control"
+                                    type="text" required ng-model="RequesterModel.name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="lastName" cam-variable-type="String" placeholder="نام خانوادگی"
+                                    class="form-control" type="text" required ng-model="RequesterModel.lastName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="fatherName" cam-variable-type="String" placeholder="نام پدر"
+                                    class="form-control" type="text" required ng-model="RequesterModel.fatherName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="IdNum" placeholder="شماره شناسنامه" class="form-control" type="text" required
+                                    cam-variable-type="Integer" ng-model="RequesterModel.IdNum">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input uib-datepicker-popup="yyyy/MM/dd" ng-click="open($event)"
+                                is-open="dateFieldOpened" id="birthdate" type="hidden" required
+                                ng-model="RequesterModel.birthdate">
+                                <input type="text" disabled placeholder="تاریخ تولد" class="form-control"
+                                    value="{{RequesterModel.birthdate | camDate:'short'}}">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event)">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                              </div>
+                           
+                        </div>
+                      
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="originatedLoc" placeholder="محل صدور" class="form-control" type="text"
+                                    required ng-model="RequesterModel.originatedLoc">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="education" placeholder="میزان تحصیلات" class="form-control" type="text"
+                                    required ng-model="RequesterModel.education">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="religious" placeholder="مذهب" class="form-control" type="text" required
+                                    ng-model="RequesterModel.religious">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="nationalCode" placeholder="شماره ملی" class="form-control" type="text"
+                                    required ng-model="RequesterModel.nationalCode">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="drivingLicenseType" placeholder="نوع گواهی نامه" class="form-control"
+                                    type="text" required ng-model="RequesterModel.drivingLicenseType">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="drivingLicenseTypeNumber" placeholder="شماره گواهی نامه" class="form-control"
+                                    type="text" required ng-model="RequesterModel.drivingLicenseTypeNumber">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="drivingLicenseIssue" placeholder="صادره" class="form-control" type="text"
+                                    required ng-model="RequesterModel.drivingLicenseIssue">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-12 ">
+
+                        <!-- <p class="input-group">
+
+                            <input type="text"
+                                 uib-datepicker-popup="yyyy/MM/dd"
+                                 class="form-control"
+                                 ng-model="RequesterModel.drivingLicenseIssueDate"
+                                 is-open="drivingLicenseIssueDateOpen" 
+                                 />
+                          
+                            <span class="input-group-btn">
+                              <button type="button"ی
+                                      class="btn btn-default"
+                                      ng-click="open($event,1)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                              </button>
+                            </span>
+                          </p> -->
+                          <div class="form-group">
+                            <div class="input-group">
+                              <!-- hidden original value holder -->
+                              <input uib-datepicker-popup="yyyy/MM/dd" ng-click="open($event,1)"
+                                is-open="drivingLicenseIssueDateOpen" id="drivingLicenseIssueDate" type="hidden" required
+                                ng-model="RequesterModel.drivingLicenseIssueDate">
+                                
+                                <!-- persian text wrapper -->
+                                <input type="text" disabled placeholder="تاریخ صدور گواهینامه" class="form-control"
+                                    value="{{RequesterModel.drivingLicenseIssueDate | camDate:'short'}}">
+
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event,1)">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                              </div>
+                           
+                        </div>
+                      
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="input-group">
+                              <!-- hidden original value holder -->
+                              <input uib-datepicker-popup="yyyy/MM/dd" ng-click="open($event,2)"
+                                is-open="firstDrivingTrafficLicenseIssueDate" id="firstDrivingTrafficLicenseIssueDate" type="hidden" required
+                                ng-model="RequesterModel.firstDrivingTrafficLicenseIssueDate">
+                                
+                                <!-- persian text wrapper -->
+                                <input type="text" disabled placeholder="تاریخ صدور گواهینامه" class="form-control"
+                                    value="{{RequesterModel.firstDrivingTrafficLicenseIssueDate | camDate:'short'}}">
+
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event,2)">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                              </div>
+                           
+                        </div>
+
+                        
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="kishAddress" placeholder="آدرس در جزیره کیش" class="form-control" type="text"
+                                    required ng-model="RequesterModel.kishAddress">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="kishTelephone" placeholder="تلفن تماس کیش" class="form-control" type="text"
+                                    required ng-model="RequesterModel.kishTelephone">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="address" placeholder="آدرس خارج از کیش" class="form-control" type="text"
+                                    required ng-model="RequesterModel.address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <input id="telephone" placeholder="شماره تماس خارج از کیش" class="form-control"
+                                    type="text" required ng-model="RequesterModel.telephone">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-xs-12 ">
+            <div class="panel panel-info">
+                <div class="panel-heading">آپلود مدارک</div>
+                <div class="panel-body">
+
+
+                    <div class="form-inline col-lg-4 col-md-3 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <label for="shenasnameFile">تصویر از تمام صفحات شناسنامه متقاضی</label>
+                                <input type="file" id="shenasnameFile" cam-variable-name="shenasnamehFile"
+                                    cam-variable-type="File" cam-max-filesize="10000000" class="form-control" />
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="form-inline col-lg-4 col-md-6 col-xs-12 ">
+                        <div class="form-group">
+                            <div class="controls">
+                                <label for="facePictureFile">عکس 3 در 4</label>
+                                <input type="file" id="facePictureFile" cam-variable-name="facePictureFile"
+                                    cam-variable-type="File" cam-max-filesize="10000000" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--                       
+                        <div class="form-inline col-lg-4 col-md-6 col-xs-12 ">
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label 
+                                for="shenasnameWife">تصویر از تمام صفحات شناسنامه همسر</label>
+                                <input type="file"
+                                  id="shenasnameWife"
+                                  cam-variable-name="shenasnameWife"
+                                  cam-variable-type="File"
+                                  cam-max-filesize="10000000"
+                                  
+                                  class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-inline col-lg-4 col-md-6 col-xs-12 ">
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label 
+                                for="marriageFile">تصویر سند ازدواج (فقط مشخصات زوجین)</label>
+                                <input type="file"
+                                  id="marriageFile"
+                                  cam-variable-name="marriageFile"
+                                  cam-variable-type="File"
+                                  cam-max-filesize="10000000"
+                                  
+                                  class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="form-inline col-lg-4 col-md-6 col-xs-12 ">
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label 
+                                for="educationFile">تصویر مدرک تحصیلی (حداقل دیپلم)</label>
+                                <input type="file"
+                                  id="educationFile"
+                                  cam-variable-name="educationFile"
+                                  cam-variable-type="File"
+                                  
+                                  cam-max-filesize="10000000"
+                                  class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="form-inline col-lg-4 col-md-6 col-xs-12 ">
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label 
+                                for="militaryFile">کپی کارت پایان خدمت یا معافیت </label>
+                                <input type="file"
+                                  id="militaryFile"
+                                  cam-variable-name="militaryFile"
+                                  cam-variable-type="File"
+                                  
+                                  cam-max-filesize="10000000"
+                                  class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="form-inline col-lg-4 col-md-6 col-xs-12 ">
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label 
+                                for="drivingFile">تصویر گواهینامه رانندگی</label>
+                                <input type="file"
+                                  id="drivingFile"
+                                  cam-variable-name="drivingFile"
+                                  
+                                  cam-variable-type="File"
+                                  cam-max-filesize="10000000"
+                                  class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    
+                      
+                        <div class="form-inline col-lg-5 col-md-6 col-xs-12 ">
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label 
+                                for="agancyFile">معرفی نامه از یکی از آژانس های حمل و نقل عمومی</label>
+                                <input type="file"
+                                  id="agancyFile"
+                                  cam-variable-name="agancyFile"
+                                  cam-variable-type="File"
+                                  
+                                  cam-max-filesize="10000000"
+                                  class="form-control"/>
+                                </div>
+                            </div>
+                        </div> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

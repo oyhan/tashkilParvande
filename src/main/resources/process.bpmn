@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1q0qj2r" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+  <bpmn:collaboration id="Collaboration_09vckr9">
+    <bpmn:participant id="Participant_aqwd" name="فرایند تشکیل پرونده" processRef="Process_32132132" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_32132132" name="فرایند تشکیل پرونده" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_1ogcyk8">
+      <bpmn:lane id="Lane_16qpblp" name="متقاضی">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1pmep2i" name="مسئول بررسی پرونده">
+        <bpmn:flowNodeRef>Gateway_1ck7d1u</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0kx7np9</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0b5a6ep</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0dzkb0q</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1u2bljy" name="مسئول دریافت مدارک">
+        <bpmn:flowNodeRef>Event_1yi6w3k</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1wnwx6w</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_16a8lhc</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1" name="تکمیل فرم درخواست" camunda:formKey="embedded:app:forms/Request.html">
+      <bpmn:outgoing>Flow_1lwp1vd</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_1ck7d1u" name="مدارک کامل می باشد؟">
+      <bpmn:incoming>Flow_0vcmerx</bpmn:incoming>
+      <bpmn:outgoing>Flow_0nrmkbf</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0v4bwmm</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1lwp1vd" sourceRef="StartEvent_1" targetRef="Activity_0kx7np9" />
+    <bpmn:sequenceFlow id="Flow_0vcmerx" sourceRef="Activity_0kx7np9" targetRef="Gateway_1ck7d1u" />
+    <bpmn:sequenceFlow id="Flow_0nrmkbf" name="بله" sourceRef="Gateway_1ck7d1u" targetRef="Activity_16a8lhc">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_067v34l" sourceRef="Activity_1wnwx6w" targetRef="Event_1yi6w3k" />
+    <bpmn:sequenceFlow id="Flow_0v4bwmm" sourceRef="Gateway_1ck7d1u" targetRef="Activity_0dzkb0q">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!approved}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1n7gz7n" sourceRef="Activity_0dzkb0q" targetRef="Event_0b5a6ep" />
+    <bpmn:userTask id="Activity_0kx7np9" name="بررسی مدارک" camunda:formKey="embedded:app:forms/approve-documents.html">
+      <bpmn:incoming>Flow_1lwp1vd</bpmn:incoming>
+      <bpmn:outgoing>Flow_0vcmerx</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_0b5a6ep">
+      <bpmn:incoming>Flow_1n7gz7n</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="Event_1yi6w3k">
+      <bpmn:incoming>Flow_067v34l</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="Activity_1wnwx6w" name="دریافت مدارک و صدور معرفی نامه" camunda:formKey="embedded:app:forms/PrintInquery.html">
+      <bpmn:incoming>Flow_0azt3tl</bpmn:incoming>
+      <bpmn:outgoing>Flow_067v34l</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0azt3tl" sourceRef="Activity_16a8lhc" targetRef="Activity_1wnwx6w" />
+    <bpmn:serviceTask id="Activity_0dzkb0q" name="اعلام عدم تایید" camunda:class="com.gset.kish.TashkilParvande.NotConfirmed">
+      <bpmn:incoming>Flow_0v4bwmm</bpmn:incoming>
+      <bpmn:outgoing>Flow_1n7gz7n</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_16a8lhc" name="اعلام زمان مراجعه" camunda:class="com.gset.kish.TashkilParvande.Confirmed">
+      <bpmn:incoming>Flow_0nrmkbf</bpmn:incoming>
+      <bpmn:outgoing>Flow_0azt3tl</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_09vckr9">
+      <bpmndi:BPMNShape id="Participant_0bz866f_di" bpmnElement="Participant_aqwd" isHorizontal="true">
+        <dc:Bounds x="159" y="110" width="871" height="400" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1u2bljy_di" bpmnElement="Lane_1u2bljy" isHorizontal="true">
+        <dc:Bounds x="189" y="390" width="841" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1pmep2i_di" bpmnElement="Lane_1pmep2i" isHorizontal="true">
+        <dc:Bounds x="189" y="240" width="841" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_16qpblp_di" bpmnElement="Lane_16qpblp" isHorizontal="true">
+        <dc:Bounds x="189" y="110" width="841" height="130" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0azt3tl_di" bpmnElement="Flow_0azt3tl">
+        <di:waypoint x="580" y="450" />
+        <di:waypoint x="760" y="450" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1n7gz7n_di" bpmnElement="Flow_1n7gz7n">
+        <di:waypoint x="860" y="310" />
+        <di:waypoint x="922" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0v4bwmm_di" bpmnElement="Flow_0v4bwmm">
+        <di:waypoint x="555" y="310" />
+        <di:waypoint x="760" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_067v34l_di" bpmnElement="Flow_067v34l">
+        <di:waypoint x="860" y="450" />
+        <di:waypoint x="922" y="450" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0nrmkbf_di" bpmnElement="Flow_0nrmkbf">
+        <di:waypoint x="530" y="335" />
+        <di:waypoint x="530" y="410" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="654" y="393" width="9" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vcmerx_di" bpmnElement="Flow_0vcmerx">
+        <di:waypoint x="470" y="310" />
+        <di:waypoint x="505" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1lwp1vd_di" bpmnElement="Flow_1lwp1vd">
+        <di:waypoint x="288" y="177" />
+        <di:waypoint x="349" y="177" />
+        <di:waypoint x="349" y="310" />
+        <di:waypoint x="370" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="252" y="159" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="232" y="129" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1ck7d1u_di" bpmnElement="Gateway_1ck7d1u" isMarkerVisible="true">
+        <dc:Bounds x="505" y="285" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="490" y="255" width="81" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_01plw5w_di" bpmnElement="Activity_0kx7np9">
+        <dc:Bounds x="370" y="270" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0b5a6ep_di" bpmnElement="Event_0b5a6ep">
+        <dc:Bounds x="922" y="292" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1yi6w3k_di" bpmnElement="Event_1yi6w3k">
+        <dc:Bounds x="922" y="432" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1aprqoa_di" bpmnElement="Activity_1wnwx6w">
+        <dc:Bounds x="760" y="410" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1bwwnj9_di" bpmnElement="Activity_0dzkb0q">
+        <dc:Bounds x="760" y="270" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_08n3jd1_di" bpmnElement="Activity_16a8lhc">
+        <dc:Bounds x="480" y="410" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

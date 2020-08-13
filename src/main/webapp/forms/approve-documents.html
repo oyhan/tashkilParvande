@@ -1,0 +1,379 @@
+<form class=""
+      role="form">
+
+      <script cam-script type="text/form-script">
+
+        camForm.on('form-loaded',function(){
+
+          camForm.variableManager.fetchVariable('RequesterModel');
+          camForm.variableManager.fetchVariable('facePictureFile');
+
+        })
+        $scope.approved = false;
+        $scope.isApproved =function(){
+             
+             $scope.approved = ! $scope.approved;
+         }
+        camForm.on('variables-fetched', function() {
+          // after the variables are fetched, bind the value of RequesterModel to a angular
+          // scope value such that the form can work on it
+         $scope.RequesterModel = camForm.variableManager.variable('RequesterModel').value;
+         
+          
+         });
+
+
+      </script>
+
+  <p>آیا مدارک مورد تایید است؟</p>
+
+  <div class="form-group">
+    <label class="control-label col-md-2">تصویر از تمام صفحات شناسنامه متقاضی</label>
+    <div class="form-control-static col-md-10">
+      <a cam-file-download="shenasnamehFile"></a>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-2">عکس 3در4</label>
+    <div class="form-control-static col-md-10">
+      
+      <div class="col-md-6">
+        <img src="{{ camForm.variableManager.variable('facePictureFile').contentUrl }}" class="img-responsive">
+    </div>
+    </div>
+  </div>
+  <!-- <div class="form-group">
+    <label class="control-label col-md-2">تصویر از تمام صفحات شناسنامه همسر</label>
+    <div class="form-control-static col-md-10">
+      <a cam-file-download="shenasnameWife"></a>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-2">تصویر سند ازدواج (فقط مشخصات زوجین)</label>
+    <div class="form-control-static col-md-10">
+      <a cam-file-download="marriageFile"></a>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-2">تصویر مدرک تحصیلی (حداقل دیپلم)</label>
+    <div class="form-control-static col-md-10">
+      <a cam-file-download="educationFile"></a>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-2">کپی کارت پایان خدمت یا معافیت </label>
+    <div class="form-control-static col-md-10">
+      <a cam-file-download="militaryFile"></a>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-2">تصویر گواهینامه رانندگی</label>
+    <div class="form-control-static col-md-10">
+      <a cam-file-download="drivingFile"></a>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-2">عکس 3 در 4</label>
+    <div class="form-control-static col-md-10">
+      <a cam-file-download="facePictureFile"></a>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-2">معرفی نامه از یکی از آژانس های حمل و نقل عمومی</label>
+    <div class="form-control-static col-md-10">
+      <a cam-file-download="agancyFile"></a>
+    </div>
+  </div>  -->
+
+
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-xs-12 ">
+        <div class="panel panel-primary">
+            <div class="panel-heading">مشخصات خودرو</div>
+            <div class="panel-body">
+                <div class="col-lg-6 col-md-6 col-xs-12 ">
+                    <div class="form-group">
+                        <label class="control-label" for="UserID">شماره پلاک</label>
+                        <div class="controls">
+                            <input id="plateNumber" class="form-control" type="text" required
+                                ng-model="RequesterModel.plateNumber" ng-model-options="{debounce: 500}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 ">
+                    <div class="form-group">
+                        <label class="control-label" for="code">کد</label>
+                        <div class="controls">
+                            <input id="code" class="form-control" type="text" required
+                                ng-model="RequesterModel.code" ng-model-options="{debounce: 500}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 ">
+                    <div class="form-group">
+                        <label class="control-label" for="agancy">آژانس</label>
+                        <div class="controls">
+                            <input id="agancy" class="form-control" type="text" required
+                                ng-model="RequesterModel.agancy" ng-model-options="{debounce: 500}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 ">
+                    <div class="form-group">
+                        <label class="control-label" for="idCode">کد شناسایی</label>
+                        <div class="controls">
+                            <input id="idCode" class="form-control" type="text" required
+                                ng-model="RequesterModel.idCode" ng-model-options="{debounce: 500}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-xs-12 ">
+                    <div class="form-group">
+                        <label class="control-label" for="vehicleType">نوع خودرو عمومی</label>
+                        <div class="controls">
+                            <input id="vehicleType" class="form-control" type="text" required
+                                ng-model="RequesterModel.vehicleType" ng-model-options="{debounce: 500}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 ">
+                    <div class="form-group">
+                        <label class="control-label" for="vehicleYear">سال تولید خودرو</label>
+                        <div class="controls">
+                            <input id="vehicleYear" class="form-control" type="text" required
+                                ng-model="RequesterModel.vehicleYear" ng-model-options="{debounce: 500}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-xs-12 ">
+                    <div class="form-group">
+                        <label class="radio-inline">
+                            <input type="radio" name="vehicleOwnerType" ng-model="RequesterModel.vehicleOwnerType"
+                                id="inlineCheckbox1" value="6d"> مالک شش دانگ
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="radio" name="vehicleOwnerType" ng-model="RequesterModel.vehicleOwnerType"
+                                id="inlineCheckbox2" value="3d"> مالک سه دانگ
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="radio" name="vehicleOwnerType" ng-model="RequesterModel.vehicleOwnerType"
+                                id="inlineCheckbox3" value="0d"> راننده کمکی
+                        </label>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-xs-12 ">
+        <div class="panel panel-info">
+            <div class="panel-heading">مشخصات راننده</div>
+            <div class="panel-body">
+
+
+
+
+
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="name" placeholder="نام" class="form-control" type="text" required
+                                ng-model="RequesterModel.name">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="lastName" placeholder="نام خانوادگی" class="form-control" type="text"
+                                required ng-model="RequesterModel.lastName">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="fatherName" placeholder="نام پدر" class="form-control" type="text" required
+                                ng-model="RequesterModel.fatherName">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="IdNum" placeholder="شماره شناسنامه" class="form-control" type="text" required
+                                ng-model="RequesterModel.IdNum">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="birthdate" placeholder="تاریخ تولد" class="form-control" type="text"
+                             value="{{RequesterModel.birthdate | camDate:'year'}}" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="originatedLoc" placeholder="محل صدور" class="form-control" type="text"
+                                required ng-model="RequesterModel.originatedLoc">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="education" placeholder="میزان تحصیلات" class="form-control" type="text"
+                                required ng-model="RequesterModel.education">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="religious" placeholder="مذهب" class="form-control" type="text" required
+                                ng-model="RequesterModel.religious">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="nationalCode" placeholder="شماره ملی" class="form-control" type="text"
+                                required ng-model="RequesterModel.nationalCode">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="drivingLicenseType" placeholder="نوع گواهی نامه" class="form-control"
+                                type="text" required ng-model="RequesterModel.drivingLicenseType">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="drivingLicenseTypeNumber" placeholder="شماره گواهی نامه" class="form-control"
+                                type="text" required ng-model="RequesterModel.drivingLicenseTypeNumber">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="drivingLicenseIssue" placeholder="صادره" class="form-control" type="text"
+                                required ng-model="RequesterModel.drivingLicenseIssue">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="drivingLicenseIssueDate" placeholder="تاریخ صدور گواهینامه"
+                                class="form-control" type="text" required
+                               value="{{RequesterModel.drivingLicenseIssueDate | camDate }}" 
+                                
+                                >
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="firstDrivingTrafficLicenseIssueDate"
+                                placeholder="تاریخ صدور اولین مجوز تردد رانندگی" class="form-control" type="text"
+                                required ng-model="RequesterModel.firstDrivingTrafficLicenseIssueDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="kishAddress" placeholder="آدرس در جزیره کیش" class="form-control" type="text"
+                                required ng-model="RequesterModel.kishAddress">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="kishTelephone" placeholder="تلفن تماس کیش" class="form-control" type="text"
+                                required ng-model="RequesterModel.kishTelephone">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="address" placeholder="آدرس خارج از کیش" class="form-control" type="text"
+                                required ng-model="RequesterModel.address">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <div class="form-group">
+                        <div class="controls">
+                            <input id="telephone" placeholder="شماره تماس خارج از کیش" class="form-control"
+                                type="text" required ng-model="RequesterModel.telephone">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <div class="form-group">
+    <div class="col-md-10 col-md-offset-2">
+      <div class="checkbox">
+        <label>
+          <input ng-click="isApproved()" cam-variable-name="approved"
+                 cam-variable-type="Boolean"
+                 type="checkbox"
+                 name="approved"
+                 class="form-control" />
+          آیا مورد تایید است؟
+        </label>
+      </div>
+    </div>
+    <div ng-show='!approved' class="col-lg-6 col-md-6 col-xs-12 ">
+        <div class="form-group">
+            <label class="control-label" for="rejectReason">توضحیات رد پرونده</label>
+            <div class="controls">
+                <input 
+                id="rejectReason"
+                class="form-control"
+                cam-variable-name="rejectReason"
+                cam-variable-type="String"
+                type="textarea"
+                ng-required='!approved'
+                    ng-model-options="{debounce: 500}">
+            </div>
+        </div>
+    </div>
+    <div ng-show='approved' class="col-lg-6 col-md-6 col-xs-12 ">
+        <div class="form-group">
+            <label class="control-label" for="referralDate">زمان مراجعه</label>
+            <div class="controls">
+                <input 
+                id="referralDate"
+                class="form-control"
+                cam-variable-name="referralDate"
+                cam-variable-type="String"
+                type="text"
+                ng-required='approved'
+                    ng-model-options="{debounce: 500}">
+            </div>
+        </div>
+    </div>
+ 
+  </div>
+</form>

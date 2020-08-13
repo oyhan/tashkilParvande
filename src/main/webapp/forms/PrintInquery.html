@@ -1,0 +1,218 @@
+<link href="./styles/print.css  " rel="stylesheet" media="all">
+
+<link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css" media="all">
+
+<form class=""
+      role="form">
+
+      <script cam-script type="text/form-script">
+
+        camForm.on('form-loaded',function(){
+
+          camForm.variableManager.fetchVariable('RequesterModel');
+          camForm.variableManager.fetchVariable('facePictureFile');
+
+        })
+        $scope.today = new Date();
+
+        camForm.on('variables-fetched', function() {
+          // after the variables are fetched, bind the value of RequesterModel to a angular
+          // scope value such that the form can work on it
+         $scope.RequesterModel = camForm.variableManager.variable('RequesterModel').value;
+         console.log('$scope.RequesterModel: ', $scope.RequesterModel);
+          
+         });
+
+
+      </script>
+
+      <div id="print-rahnamai" class="container printable" dir="rtl">
+        <header>
+            <div class="rows">
+                <div class="flex-8 logo">
+                    <img src="./assets/logo.png" alt="">
+                </div>
+
+                <div class="flex-10 info">
+                    <div class="rows">
+
+                        <div class="flex-12">
+                            <span>شماره:</span> <span>----------------------</span>
+                            <span>تاریخ:</span> <span>  {{ today | camDate :'short'}}</span>
+                            <span>  پیوست:</span> <span> ندارد</span>
+                        </div>
+                    </div>
+
+                    <div class="rows">
+                        <div class="flex-12">
+                            <span>کد اقتصادی:</span> <span>4111-4644-8464</span>
+                            <span>شناسه ملی:</span> <span>10861524783</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </header>
+
+        <div class="mail-body">
+            <div class="rows">
+                <div class="flex-10 title">
+                    <p>ریاست محترم اداره راهنمایی و رانندگی کیش</p>
+                </div>
+                <div class="flex-1 face-picture">
+                    <img src="{{ camForm.variableManager.variable('facePictureFile').contentUrl }}" class="img-responsive">
+
+                </div>
+
+            </div>
+            <div class="container">
+                <div class="rows">
+                    <div class="flex-12">
+                        <p class="first-line">با سلام و احترام</p>
+                        <p>
+                            با استناد به بند 4 صورتجلسه شورای عالی ترافیک مورخ 82/01/27
+                            به استحضار میرساند که آقای {{RequesterModel.name}} {{RequesterModel.lastName}} فرزند
+                            {{RequesterModel.fatherName}}
+                            شماره شناسنامه {{RequesterModel.IdNum}} صادره {{RequesterModel.originatedLoc}} متولد سال
+                            {{RequesterModel.birthdate | camDate:'year'}} دارنده کارت ملی
+                            به شماره {{RequesterModel.nationalCode}} متقاضی اخذ دفترچه تردد(تاکسی‌رانی) جهت استعلام
+                            گواهینامه حضورتان معرفی می گردد
+                            دستور فرمایید افدامات لازم در این خصوص صورت گرفته و نتیجه را به این مدیریت منعکس نمایند
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+        <footer>
+            <div class="rows">
+                <div class="flex-10">
+                </div>
+                <div class="">
+                    <p><b>حسن‌ محمد‌علی‌پور</b></p>
+                    <p style="
+                    text-indent: -28px;
+                "><b>سرپرست مدریت حمل و نقل عمومی</b></p>
+                </div>
+            </div>
+
+
+        </footer>
+    </div>
+
+
+    <div id="print-salamat"  class="container printable" dir="rtl">
+        <header>
+
+            <div class="rows">
+                <div class="flex-8 logo">
+                    <img src="./assets/logo.png" alt="">
+                </div>
+
+                <div class="flex-10 info">
+                    <div class="rows">
+
+                        <div class="flex-12">
+                            <span>شماره:</span> <span>----------</span>
+                            <span>تاریخ:</span> <span>{{today | camDate :'short'}}</span>
+                            <span>پیوست:</span> <span>ندارد</span>
+                        </div>
+                    </div>
+
+                    <div class="rows">
+                        <div class="flex-12">
+                            <span>کد اقتصادی:</span> <span>4111-4644-8464</span>
+                            <span>شناسه ملی:</span> <span>10861524783</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </header>
+
+        <div class="mail-body">
+            <div class="rows">
+                <div class="flex-10 title">
+                    <p>ریاست محترم مزک توسعه سلامت کیش</p>
+                </div>
+                <div class="flex-1 face-picture">
+                    <img src="{{ camForm.variableManager.variable('facePictureFile').contentUrl }}" class="img-responsive">
+
+                </div>
+
+            </div>
+            <div class="container">
+                <div class="rows">
+                    <div class="flex-12">
+                        <p class="first-line">با سلام و احترام</p>
+                        <p>
+                            با استناد به بند (د) صورتجلسه مورخ 78/10/14
+                            به استحضار میرساند که آقای {{RequesterModel.name}} {{RequesterModel.lastName}} فرزند
+                            {{RequesterModel.fatherName}}
+                            شماره شناسنامه {{RequesterModel.IdNum}} صادره {{RequesterModel.originatedLoc}} متولد سال
+                            {{RequesterModel.birthdate | camDate:'year'}} دارنده کارت ملی
+                            به شماره {{RequesterModel.nationalCode}} متقاضی اخذ دفترچه تردد {{RequesterModel.vehicleType}} جهت استعلام تندرستی
+                            انجام آزمایش ده تسته از طریق مراجع ذیصلاح حضورتان 
+                             معرفی می گردد
+                            دستور فرمایید افدامات لازم در این خصوص صورت گرفته و نتیجه را به این مدیریت منعکس نمایند
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+        <footer>
+            <div class="rows">
+                <div class="flex-10">
+                </div>
+                <div class="">
+                    <p><b>حسن‌ محمد‌علی‌پور</b></p>
+                    <p style="
+                    text-indent: -28px;
+                "><b>سرپرست مدریت حمل و نقل عمومی</b></p>
+                </div>
+            </div>
+
+
+        </footer>
+    </div>
+    <button class="btn btn-default" onclick="print1()">پرینت استعلام گواهینامه</button>
+    <button class="btn btn-default" onclick="print2()">پرینت استعلام تندرستی</button>
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+
+    <script>
+        function print1() {
+            $('#print-rahnamai').show();
+            printJS({ printable: 'print-rahnamai', type: 'html', css: ['./styles/print.css'] });
+            $('#print-rahnamai').hide();
+
+
+        }
+        function print2() {
+            $('#print-salamat').show();
+            printJS({ printable: 'print-salamat', type: 'html', css: ['./styles/print.css'] });
+            $('#print-salamat   ').hide();
+
+
+        }
+       
+    </script>
+</form>
