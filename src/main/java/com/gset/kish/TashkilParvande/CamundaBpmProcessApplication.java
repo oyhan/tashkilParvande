@@ -1,5 +1,6 @@
 package com.gset.kish.TashkilParvande;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,11 +24,7 @@ public class CamundaBpmProcessApplication extends ServletProcessApplication {
   @PostDeploy
   public void onDeploymentFinished(ProcessEngine processEngine) {
 
-    // start an initial process instance
-//    Map<String, Object> variables = new HashMap<String, Object>();
-//    variables.put("name", "John");
-//    
-//    processEngine.getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
+	  
   }
 
 }

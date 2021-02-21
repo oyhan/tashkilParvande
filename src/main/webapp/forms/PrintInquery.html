@@ -1,48 +1,33 @@
 <link href="./styles/print.css  " rel="stylesheet" media="all">
-
 <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css" media="all">
-
-<form class=""
-      role="form">
-
-      <script cam-script type="text/form-script">
-
+<form class="" role="form">
+    <script cam-script type="text/form-script">
         camForm.on('form-loaded',function(){
-
           camForm.variableManager.fetchVariable('RequesterModel');
           camForm.variableManager.fetchVariable('facePictureFile');
-
         })
         $scope.today = new Date();
-
         camForm.on('variables-fetched', function() {
           // after the variables are fetched, bind the value of RequesterModel to a angular
           // scope value such that the form can work on it
          $scope.RequesterModel = camForm.variableManager.variable('RequesterModel').value;
          console.log('$scope.RequesterModel: ', $scope.RequesterModel);
-          
          });
-
-
       </script>
-
-      <div id="print-rahnamai" class="container printable" dir="rtl">
+    <div id="print-rahnamai" class="container printable" dir="rtl">
         <header>
             <div class="rows">
                 <div class="flex-8 logo">
                     <img src="./assets/logo.png" alt="">
                 </div>
-
                 <div class="flex-10 info">
                     <div class="rows">
-
                         <div class="flex-12">
                             <span>شماره:</span> <span>----------------------</span>
-                            <span>تاریخ:</span> <span>  {{ today | camDate :'short'}}</span>
-                            <span>  پیوست:</span> <span> ندارد</span>
+                            <span>تاریخ:</span> <span> {{ today | camDate :'short'}}</span>
+                            <span> پیوست:</span> <span> ندارد</span>
                         </div>
                     </div>
-
                     <div class="rows">
                         <div class="flex-12">
                             <span>کد اقتصادی:</span> <span>4111-4644-8464</span>
@@ -51,21 +36,16 @@
                     </div>
                 </div>
             </div>
-
-
-
         </header>
-
         <div class="mail-body">
             <div class="rows">
                 <div class="flex-10 title">
                     <p>ریاست محترم اداره راهنمایی و رانندگی کیش</p>
                 </div>
                 <div class="flex-1 face-picture">
-                    <img src="{{ camForm.variableManager.variable('facePictureFile').contentUrl }}" class="img-responsive">
-
+                    <img src="{{ camForm.variableManager.variable('facePictureFile').contentUrl }}"
+                        class="img-responsive">
                 </div>
-
             </div>
             <div class="container">
                 <div class="rows">
@@ -83,16 +63,8 @@
                         </p>
                     </div>
                 </div>
-
             </div>
-
-
-
-
-
         </div>
-
-
         <footer>
             <div class="rows">
                 <div class="flex-10">
@@ -104,30 +76,22 @@
                 "><b>سرپرست مدریت حمل و نقل عمومی</b></p>
                 </div>
             </div>
-
-
         </footer>
     </div>
-
-
-    <div id="print-salamat"  class="container printable" dir="rtl">
+    <div id="print-salamat" class="container printable" dir="rtl">
         <header>
-
             <div class="rows">
                 <div class="flex-8 logo">
                     <img src="./assets/logo.png" alt="">
                 </div>
-
                 <div class="flex-10 info">
                     <div class="rows">
-
                         <div class="flex-12">
                             <span>شماره:</span> <span>----------</span>
                             <span>تاریخ:</span> <span>{{today | camDate :'short'}}</span>
                             <span>پیوست:</span> <span>ندارد</span>
                         </div>
                     </div>
-
                     <div class="rows">
                         <div class="flex-12">
                             <span>کد اقتصادی:</span> <span>4111-4644-8464</span>
@@ -136,21 +100,16 @@
                     </div>
                 </div>
             </div>
-
-
-
         </header>
-
         <div class="mail-body">
             <div class="rows">
                 <div class="flex-10 title">
-                    <p>ریاست محترم مزک توسعه سلامت کیش</p>
+                    <p>ریاست محترم مرکز توسعه سلامت کیش</p>
                 </div>
                 <div class="flex-1 face-picture">
-                    <img src="{{ camForm.variableManager.variable('facePictureFile').contentUrl }}" class="img-responsive">
-
+                    <img src="{{ camForm.variableManager.variable('facePictureFile').contentUrl }}"
+                        class="img-responsive">
                 </div>
-
             </div>
             <div class="container">
                 <div class="rows">
@@ -162,23 +121,16 @@
                             {{RequesterModel.fatherName}}
                             شماره شناسنامه {{RequesterModel.IdNum}} صادره {{RequesterModel.originatedLoc}} متولد سال
                             {{RequesterModel.birthdate | camDate:'year'}} دارنده کارت ملی
-                            به شماره {{RequesterModel.nationalCode}} متقاضی اخذ دفترچه تردد {{RequesterModel.vehicleType}} جهت استعلام تندرستی
-                            انجام آزمایش ده تسته از طریق مراجع ذیصلاح حضورتان 
-                             معرفی می گردد
+                            به شماره {{RequesterModel.nationalCode}} متقاضی اخذ دفترچه تردد
+                            {{RequesterModel.vehicleType}} جهت استعلام تندرستی
+                            انجام آزمایش ده تسته از طریق مراجع ذیصلاح حضورتان
+                            معرفی می گردد
                             دستور فرمایید افدامات لازم در این خصوص صورت گرفته و نتیجه را به این مدیریت منعکس نمایند
                         </p>
                     </div>
                 </div>
-
             </div>
-
-
-
-
-
         </div>
-
-
         <footer>
             <div class="rows">
                 <div class="flex-10">
@@ -190,29 +142,140 @@
                 "><b>سرپرست مدریت حمل و نقل عمومی</b></p>
                 </div>
             </div>
-
-
+        </footer>
+    </div>
+    <div id="print-sooe" class="container printable" dir="rtl">
+        <header>
+            <div class="rows">
+                <div class="flex-8 logo">
+                    <img src="./assets/logo.png" alt="">
+                </div>
+                <div class="flex-10 info">
+                    <div class="rows">
+                        <div class="flex-12">
+                            <span>شماره:</span> <span>----------</span>
+                            <span>تاریخ:</span> <span>{{today | camDate :'short'}}</span>
+                            <span>پیوست:</span> <span>ندارد</span>
+                        </div>
+                    </div>
+                    <div class="rows">
+                        <div class="flex-12">
+                            <span>کد اقتصادی:</span> <span>4111-4644-8464</span>
+                            <span>شناسه ملی:</span> <span>10861524783</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mail-body">
+            <div class="rows">
+                <div class="flex-10 title">
+                    <p>ریاست محترم اداره پلیس + 10 کیش</p>
+                </div>
+                
+            </div>
+            <div class="container">
+                <div class="rows">
+                    <div class="flex-12">
+                        <p class="first-line">با سلام و احترام</p>
+                        <p>
+                            بدینوسلیه آقای: <strong>{{RequesterModel.name}} {{RequesterModel.lastName}}</strong> با مشخصات سجلی ذیل که
+                            متقاضی دریافت کارت
+                            تردد تاکسیرانی در این شرکت می باشد جهت انگشت نگاری و استعلام سوابق کیفری بحضور معرفی
+                            میگردد.دستور فرمایید نتیجه بررسی های به عمل آمده را جهت بهره برداری و درج در پرونده صنفی وی
+                            به اداره نظارت بر اماکن عمومی
+                            ارسال نمایند.
+                        </p>
+                        <table border="1">
+                            <tr>
+                                <td colspan="4">نام خانوادگی: {{RequesterModel.lastName}}</td>
+                                <td colspan="4">نام: {{RequesterModel.name}}</td>
+                                <td colspan="4">کدملی: {{RequesterModel.nationalCode}}</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">نام خانوادگی قبلی</th>
+                                <th colspan="2">نام پدر</th>
+                                <th colspan="2">ش.شناسنامه</th>
+                                <th colspan="2">محل تولد</th>
+                                <th colspan="2">تاریخ تولد</th>
+                                <th colspan="2">مدرک تحصیلی</th>
+                            </tr>
+                            <tr>
+                                <td colspan="2">-------</td>
+                                <td colspan="2">{{RequesterModel.fathersName}}</td>
+                                <td colspan="2">{{RequesterModel.IdNum}}</td>
+                                <td colspan="2">{{RequesterModel.originatedLoc}}</td>
+                                <td colspan="2">{{RequesterModel.birthdate | camDate:'short'}}</td>
+                                <td colspan="2">{{RequesterModel.education}}</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">وضعیت تاهل</th>
+                                <th colspan="2">تابعیت</th>
+                                <th colspan="2">ملیت</th>
+                                <th colspan="2">مذهب</th>
+                                <th colspan="2">شغل فعلی</th>
+                                <th colspan="2">شغل قبلی</th>
+                            </tr>
+                            <tr>
+                                <td colspan="2">متاهل</td>
+                                <td colspan="2">ایرانی</td>
+                                <td colspan="2">ایران</td>
+                                <td colspan="2">{{RequesterModel.religious}}</td>
+                                <td colspan="2">-</td>
+                                <td colspan="2">-</td>
+                            </tr>
+                            <tr>
+                                <td colspan="8">
+                                    <p> نشانی و محل سکونت : {{RequesterModel.address}} </p>
+                                    <p>تلفن : {{RequesterModel.kishTelephone}}</p>
+                                </td>
+                                <td rowspan="2" colspan="4">
+                                    <div class="rows centered face-picture">
+                                        <img src="{{ camForm.variableManager.variable('facePictureFile').contentUrl }}"
+                                            class="img-responsive">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8">نشانی و محل کار: </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="rows">
+                <div class="flex-10">
+                </div>
+                <div class="">
+                    <p><b>حسن‌ محمد‌علی‌پور</b></p>
+                    <p style="
+                    text-indent: -28px;
+                "><b>سرپرست مدریت حمل و نقل عمومی</b></p>
+                </div>
+            </div>
         </footer>
     </div>
     <button class="btn btn-default" onclick="print1()">پرینت استعلام گواهینامه</button>
     <button class="btn btn-default" onclick="print2()">پرینت استعلام تندرستی</button>
+    <button class="btn btn-default" onclick="print3()">پرینت نامه سوء پیشینه</button>
     <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
-
     <script>
         function print1() {
             $('#print-rahnamai').show();
             printJS({ printable: 'print-rahnamai', type: 'html', css: ['./styles/print.css'] });
             $('#print-rahnamai').hide();
-
-
         }
         function print2() {
             $('#print-salamat').show();
             printJS({ printable: 'print-salamat', type: 'html', css: ['./styles/print.css'] });
-            $('#print-salamat   ').hide();
-
-
+            $('#print-salamat').hide();
         }
-       
+        function print3() {
+            $('#print-sooe').show();
+            printJS({ printable: 'print-sooe', type: 'html', css: ['./styles/print.css'] });
+            $('#print-sooe').hide();
+        }
     </script>
 </form>

@@ -12,7 +12,7 @@ public class SmsService {
 	
 	public boolean SendSms(String mobileNumber, String content) throws Exception{
 		
-		 DefaultHttpClient httpClient = new DefaultHttpClient();
+		DefaultHttpClient httpClient = new DefaultHttpClient();
 		
 		SendSmsModel sms = new SendSmsModel();
 		sms.Content =content;
