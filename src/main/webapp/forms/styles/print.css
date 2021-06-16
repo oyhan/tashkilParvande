@@ -1,109 +1,128 @@
 :root {
    --flex-length: .08
 }
-p{
-  text-indent: 28px;
+
+p {
+   text-indent: 28px;
    line-height: 32px;
    text-align: justify;
 }
-.printable{
-  font-family: IranSans;
-  width: 148mm;
-  height:  210mm;
-  display: none
+.printable {
+   font-family: IranSans;
+   width: 148mm;
+   height: 210mm;
+   display: none
+}
+.printable-a4 {
+   font-family: IranSans;
+   /* display: none */
+}
+
+.font-iransans {
+   font-family: IranSans;
 }
 
 .face-picture img {
-  width: 3cm;
-  height: 4cm;
+   width: 3cm;
+   height: 4cm;
 }
+
 .title {
-  font-weight: bold;
+   font-weight: bold;
 }
+
 .logo img {
    max-width: 100px;
 }
+
 .rows {
    display: flex;
    width: 100%;
 }
-.centered{
-justify-content : center
+
+.centered {
+   justify-content: center
 }
+
 div#print-area {
    width: 600px;
    float: right;
 }
-.mail-body{
-}
+
+.mail-body {}
+
 .logo {
    flex: .5;
 }
-.info{
+
+.info {
    font-size: 13px;
 }
-.flex-1{
-  flex  : calc(1*.08) 
-}
-.flex-2{
-   flex  : calc(2*.08) 
+
+.flex-1 {
+   flex: calc(1*.08)
 }
 
-.flex-3{
-   flex  : calc(3*.08) 
+.flex-2 {
+   flex: calc(2*.08)
 }
 
-.flex-4{
-   flex  : calc(4*.08) 
+.flex-3 {
+   flex: calc(3*.08)
 }
 
-.flex-5{
-   flex  : calc(5*.08) 
+.flex-4 {
+   flex: calc(4*.08)
 }
 
-.flex-6{
-   flex  : calc(6*.08) 
+.flex-5 {
+   flex: calc(5*.08)
 }
 
-.flex-7{
-   flex  : calc(7*.08)
+.flex-6 {
+   flex: calc(6*.08)
 }
 
-.flex-8{
-   flex  : calc(8*.08)
+.flex-7 {
+   flex: calc(7*.08)
 }
 
-.flex-9{
-  flex  : calc(9*.08)
-}
-.flex-10{
-  flex  : calc(10*.08)
-
+.flex-8 {
+   flex: calc(8*.08)
 }
 
-.flex-11{
-  flex  : calc(11*.08)
+.flex-9 {
+   flex: calc(9*.08)
 }
 
-.flex-12{
-  flex  : calc(12*.08)
-}
-td{
-  text-align: center;
+.flex-10 {
+   flex: calc(10*.08)
 }
 
-table {
-  border-collapse: collapse;
+.flex-11 {
+   flex: calc(11*.08)
 }
-td{
-text-align: center;
+
+.flex-12 {
+   flex: calc(12*.08)
+}
+
+td {
+   text-align: center;
 }
 
 table {
-border-collapse: collapse;
+   border-collapse: collapse;
 }
-th{
-text-align : center;
-}    
-           
-      
+
+td {
+   text-align: center;
+}
+
+table {
+   border-collapse: collapse;
+}
+
+th {
+   text-align: center;
+}

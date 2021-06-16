@@ -1,0 +1,217 @@
+<link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css" media="all">
+<link rel="stylesheet" href="./styles/print.css" media="all">
+
+
+<form class="container" role="form" dir="rtl">
+    <script cam-script type="text/form-script">
+        camForm.on('form-loaded',function(){
+          camForm.variableManager.fetchVariable('mobileNumber');
+          camForm.variableManager.fetchVariable('plateNumber');
+          camForm.variableManager.fetchVariable('facePictureFile');
+          camForm.variableManager.fetchVariable('code');
+          camForm.variableManager.fetchVariable('IdNum');
+          camForm.variableManager.fetchVariable('nationalCode');
+          camForm.variableManager.fetchVariable('lastName');
+          camForm.variableManager.fetchVariable('name');
+          camForm.variableManager.fetchVariable('originatedLoc');
+          camForm.variableManager.fetchVariable('birthdate');
+          camForm.variableManager.fetchVariable('fatherName');
+          camForm.variableManager.fetchVariable('address');
+          camForm.variableManager.fetchVariable('telephone');
+          camForm.variableManager.fetchVariable('religious');
+          camForm.variableManager.fetchVariable('brandName');
+          camForm.variableManager.fetchVariable('agancy');
+        })
+    
+        $scope.today = new Date();
+    
+        camForm.on('variables-fetched', function() {
+          // after the variables are fetched, bind the value of RequesterModel to a angular
+          // scope value such that the form can work on it
+    
+         $scope.RequesterModel = {
+            mobileNumber :camForm.variableManager.variable('mobileNumber').value,
+            plateNumber :camForm.variableManager.variable('plateNumber').value,
+            lastName :camForm.variableManager.variable('code').value,
+            lastName :camForm.variableManager.variable('lastName').value,
+            fatherName :camForm.variableManager.variable('fatherName').value,
+            birthdate :camForm.variableManager.variable('birthdate').value,
+            originatedLoc :camForm.variableManager.variable('originatedLoc').value,
+            name :camForm.variableManager.variable('name').value,
+            nationalCode :camForm.variableManager.variable('nationalCode').value,
+            IdNum :camForm.variableManager.variable('IdNum').value,
+            address :camForm.variableManager.variable('address').value,
+            telephone :camForm.variableManager.variable('telephone').value,
+            religious :camForm.variableManager.variable('religious').value,
+            brandName :camForm.variableManager.variable('brandName').value,
+            agancy :camForm.variableManager.variable('agancy').value,
+         }
+    
+         });
+        </script>
+    <div dir="rtl" class="printable-a4" id="printForm">
+        <div class="rows">
+            <div class="flex-9">
+                <h1 style="text-align: center;">تعهد نامه مالکین و رانندگان وسایل نقلیه عمومی</h1>
+            </div>
+            <div class="flex-3">
+                <p>تاریخ : {{today | camDate : 'short'}}</p>
+            </div>
+        </div>
+
+        <div class="rows">
+            <div class="flex-3">
+                <p>اینجانب : {{RequesterModel.name}} {{RequesterModel.lastName}}</p>
+            </div>
+            <div class="flex-3">
+                <p>فرزند : {{RequesterModel.fatherName}}</p>
+            </div>
+            <div class="flex-3">
+                <p>دارای شماره شناسنامه : {{RequesterModel.IdNum}}</p>
+            </div>
+            <div class="flex-3">
+                <p>صادره از : {{RequesterModel.originatedLoc}}</p>
+            </div>
+        </div>
+
+        <div class="rows">
+            <div class="flex-3">
+                <p>متولد : {{RequesterModel.birthdate | camDate : 'short'}}</p>
+            </div>
+            <div class="flex-3">
+                <p>مالک / راننده خودروی : {{RequesterModel.brandName}}</p>
+            </div>
+            <div class="flex-3">
+                <p>به شماره پلاک : {{RequesterModel.plateNumber}}</p>
+            </div>
+            <div class="flex-3">
+                <p>کد : {{RequesterModel.code}}</p>
+            </div>
+        </div>
+
+        <div class="rows">
+            <div class="flex-3">
+                <p>تحت پوشش شرکت : {{RequesterModel.agancy}}</p>
+            </div>
+            <div class="flex-3">
+                <p>ساکن : </p>
+            </div>
+            <div class="flex-3">
+                <p></p>
+            </div>
+            <div class="flex-3">
+                <p>تلفن : {{RequesterModel.mobileNumber}}</p>
+            </div>
+        </div>
+
+        <div class="rows">
+            <div class="flex-12">
+                <p>بدینوسیله موارد ذیل را متعهد و ملزم میگردم به نحو احسن رعایت نمایم و در صورت هر گونه تخلف طبق مقررات
+                    جاری
+                    حمل و نقل و ترافیک با اینجانب برخورد و هیچ گونه اعتراضی نسبت به تصمیم گرفته شده ندارم.</p>
+                <ol>
+                    <li value="۱">
+                        هیچ وسیله نقلیه ای را بدون کارت تردد معتبر متعلق به خود که مشخصات خودرو نیز در آن درج شده باشد
+                        مورد
+                        بهره برداری قرار ندهم.
+                    </li>
+                    <br>
+                    <li>
+                        فقط نسبت به انجام خدمات اعلامی از سوی حمل و نقل و موسسه متبوع اقدام نمایم.
+                    </li>
+                    <br>
+                    <li>
+                        کلیه مفاد شیوه نامه و مقررات و نیز دستورالعمل های مصوب و ابلاغ شده را رعایت نمایم.
+                    </li>
+                    <br>
+                    <li>
+                        مادامی که در ناوگان حمل و نقل عمومی فعالیت دارم نسبت به انجام مظافت داخلی و خارجی حودرو در
+                        اختیار٬
+                        اقدام و با در نظر گرفتن نظافت شخصی از بلند نگاه داشتن ناخن انگشتان ٬ موی سر بلندتر از حد متعارف٬
+                        کشیدن سیگار داخل خودرو ٬ استفاده از گردنبند و دستبند طلا جدا پرهیز نمایم.
+                    </li>
+                    <br>
+                    <li>
+                        شئونات اسلامی و اجتماعی را رعایت نمایم.
+                    </li>
+                    <br>
+                    <li>
+                        از نصب لوازم و اشیا غیر مجاز در داخل و خارج خودروی در اختیار خوداری نمایم.
+                    </li>
+                    <br>
+                    <li>
+                        لباس فرم نظیف و طبق الگوی ارائه شده از سوی حمل و نقل مادامی که در حال رانندگی و ارائه سرویس
+                        میباشم ٬
+                        مورد استفاده قرار داده و به آراستگی ظاهری خود توجه نمایم.
+                    </li>
+                    <br>
+                    <li>
+                        کارت شناسایی خودرو و راننده را روی شیشه جلو از داخل و در محل تعیین شده نصب نموده و کد خودرو را
+                        روی
+                        بدنه اتومبیل درج نمایم.
+                    </li>
+                    <br>
+                    <li>
+                        در صورت توقف خودرو بیش از ۲۴ ساعت بلافاصله مراتب را به موسسه (آژانس) متبوع گزارش نمایم.
+                    </li>
+                    <br>
+                    <li>
+                        نرخ های مصوب را رعایت نمایم .
+                    </li>
+                    <br>
+                    <li>اخطار ها و تذکرات بازرسین حمل و نقل را رعایت کنم.</li>
+                    <br>
+                    <li>در صورتیکه قصد قطع همکاری با موسسه متبوع را داشته باشم ٬ حتما کارت تردد و کارت شناسائی خودرو را
+                        به
+                        امور دفتری حمل و نقل تحویل نمایم.</li>
+                    <br>
+                    <li>قبل از تنظیم هرگونه قرارداد یا قولنامه ضمن هماهنگی با مدیریت آژانس و نامه بررسی صلاحیت فردی از
+                        سوی
+                        مدیریت حمل و نقل جهت خرید یا اجاره خودرو اقدام نمایم.</li>
+                    <br>
+                    <li>
+                        در هنگام استفاده از بی سیم از ارسال پیام های غیر ضروری و غیر متعارف اجتناب نموده و در زمان
+                        مکالمه
+                        شئونات اسلامی ٬ ادب و نزاکت را رعایت نمایم.
+                    </li>
+                    <br>
+                    <li>
+                        در هنگام فعالیت خود در ناوگان حمل و نقل جهت حفظ هویت و شخصیت خود و رانندگان زحمتکش با هرگونه
+                        حرمت
+                        شکنی و ناهنجاریها که منجر به درگیری لفظی ٬ فیزیکی یا فحاشی و توهین می گردد اجتناب نمایم.
+                    </li>
+                    <br>
+                    <li>
+                        خودرور را در اختیار افراد فاقد کارت تردد قرار ندهم.
+                    </li>
+                    <br>
+                    <li>هیچگونه استنکاف از بردن مسافر نداشته باشم.</li>
+                    <br>
+                    <li>نهایت رعایت ادب و نزاکت و برخورد مناسب با مسافر داشته باشم.</li>
+                    <br>
+                </ol>
+            </div>
+        </div>
+
+        <div class="rows">
+            <div class="flex-10">
+            </div>
+            <div class="flex-2">
+                <p>امضا و اثر انگشت :</p>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-default" onclick="print1()">پرینت فرم تعهدنامه</button>
+
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    <script>
+        function print1() {
+            // $("#printForm").show();
+            printJS({ printable: 'printForm', type: 'html', css: ['./styles/print.css'] });
+            // $("#printForm").hide();
+
+        }
+
+    </script>
+</form>

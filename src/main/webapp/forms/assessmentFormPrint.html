@@ -1,0 +1,216 @@
+<link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css" media="all">
+<link rel="stylesheet" href="./styles/print.css" media="all">
+
+
+<form class="container" role="form" dir="rtl">
+    <script cam-script type="text/form-script">
+        camForm.on('form-loaded',function(){
+            camForm.variableManager.fetchVariable('transportBoss');
+            camForm.variableManager.fetchVariable('name');
+          camForm.variableManager.fetchVariable('lastName');
+          camForm.variableManager.fetchVariable('telephone');
+          camForm.variableManager.fetchVariable('code');
+          camForm.variableManager.fetchVariable('idCode');
+          camForm.variableManager.fetchVariable('vehicleType');
+          camForm.variableManager.fetchVariable('vehicleYear');
+          camForm.variableManager.fetchVariable('vehicleOwnerType'); 
+          camForm.variableManager.fetchVariable('plateNumber'); 
+          camForm.variableManager.fetchVariable('agancy'); 
+        })
+    
+        $scope.today = new Date();
+    
+        camForm.on('variables-fetched', function() {
+          // after the variables are fetched, bind the value of RequesterModel to a angular
+          // scope value such that the form can work on it
+    
+         $scope.RequesterModel = {
+            name :camForm.variableManager.variable('name').value,
+            lastName :camForm.variableManager.variable('lastName').value,
+            telephone :camForm.variableManager.variable('telephone').value,
+            code :camForm.variableManager.variable('code').value,
+            idCode :camForm.variableManager.variable('idCode').value,
+            vehicleType :camForm.variableManager.variable('vehicleType').value,
+            vehicleYear :camForm.variableManager.variable('vehicleYear').value,
+            vehicleOwnerType :camForm.variableManager.variable('vehicleOwnerType').value,
+            plateNumber :camForm.variableManager.variable('plateNumber').value,
+            agancy :camForm.variableManager.variable('agancy').value,
+            transportBoss :camForm.variableManager.variable('transportBoss').value,
+         }
+         
+         console.log('$scope.RequesterModel: ', $scope.RequesterModel);
+         });
+        </script>
+
+    <table border="1" class="printable-a4" dir="rtl" id="printForm">
+        <tr style="text-align: center;">
+            <td colspan="3" class="logo"> <img src="./assets/logo.png" alt=""></td>
+            <td colspan="6">
+                <h1>فرم ارزشیابی ویژه صدور و یا تمدید دفترچه تردد</h1>
+            </td>
+            <td colspan="3">کد فرم : .../.....<br>
+                تاریخ : .../.../... <br>
+                فرم شماره : ۲
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1">
+                <div style="transform: rotate(-90deg);">ارزیابی صدور / تمدید دفترچه رانندگی</div>
+            </td>
+            <td colspan="11">
+                <P>نام و نام خانوادگی :
+                    {{RequesterModel.name}} {{RequesterModel.lastName}} شماره تماس : {{RequesterModel.telephone}}</P>
+                <P>شماره
+                    انتظامی خودرو :
+                    {{RequesterModel.plateNumber}} کد خودرو : {{RequesterModel.code}} شرکت : {{RequesterModel.agancy}}
+                    کد
+                    شناسایی : {{RequesterModel.idCode}}</P>
+                <P>امبرده مالک : {} مالک یا مالکین
+                    خودرو : {{RequesterModel.vehicleOwnerType}} نوع خودرو : {{RequesterModel.vehicleType}} سال تولید
+                    (مدل)
+                    خودرو : {{RequesterModel.vehicleYear}}</P>
+                <div>
+                    <div class="rows">
+                        <div class="flex-12">
+                            شرح مدارک :
+                            <label for="exampleInputName2">معرفی نامه ی شرکت</label>
+                            <input type="checkbox" class="form-control" id="exampleInputName2">
+
+                            <label for="exampleInputName2">تسویه حساب شرکت سابق</label>
+                            <input type="checkbox" class="form-control" id="exampleInputName2">
+
+                            <label for="exampleInputName2">مجوز صادره ی قبلی</label>
+                            <input type="checkbox" class="form-control" id="exampleInputName2">
+
+                            <label for="exampleInputName2">تست اعتیاد</label>
+                            <input type="checkbox" class="form-control" id="exampleInputName2">
+
+                            <label for="exampleInputName2">اصل گواهینامه ی رانندگی</label>
+                            <input type="checkbox" class="form-control" id="exampleInputName2">
+                            
+                            وضعیت تاهل : {{RequesterModel.maritalStatus}}
+                        </div>
+                    </div>
+
+
+                </div>
+                <br>
+                <P>پایان قرارداد اجاره : .............. پایان اعتبار فرم عوارض خودرویی : .............</P>
+                <P>ایان اعتبار
+                    بیمه نامه ی شخص ثالث : .............. پایان اعتبار گواهی عدم خلاف : ..............</P>
+                <P> پایان
+                    اعتبار کارت معاینه فنی خودرو : .................. شماره و تاریخ فیش واریزی : ..................</P>
+                <P>عدم تمدید دفترچه ی تردد به مدت ..............</P>
+                <p>شخصات خودروی قبلی : شماره انتظامی خودرو :
+                    {{RequesterModel.plateNumber}} شرکت : {{RequesterModel.agancy}} توضیحات : ...................</p>
+
+                <div class="rows">
+                    <div class="flex-2">
+                        <p style="text-align: right;padding-right: 50px;">تنظیم کننده</p>
+                    </div>
+                    <div class="flex-10">
+                        <p style="text-align: left;padding-left: 50px;">واحد صدور دفترچه</p>
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1">
+                <div style="transform: rotate(-90deg);">شکایات و اشیا گمشده</div>
+            </td>
+            <td colspan="11">
+                <P>شرح عملکرد از تاریخ : ............ لغایت : ............ به مدت : ................ روز/ماه.
+                <P>۱.تعداد شکایات مردمی
+                    احراز شده :.................... ۲.تعداد اشیا بجامانده ی تحویلی : .................</P>
+                <div>
+                    <div class="form-group">
+                        <label for="exampleInputName2">۳.عکس دارد</label>
+                        <input type="checkbox" class="form-control" id="exampleInputName2">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName2">ندارد</label>
+                        <input type="checkbox" class="form-control" id="exampleInputName2">
+                    </div>
+                </div>
+                ۴. تعداد تخلفات حمل و نقل درون شهری : </P>
+                <P> توضیحات : ..................................................</P>
+                <p style="text-align: left;padding-left: 50px;">امضا</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1">
+                <div style="transform: rotate(-90deg);">مانیتورینگ</div>
+            </td>
+            <td colspan="11">تعداد دفعات استفاده از تاکسیمتر : <br> عملکرد راننده :
+                <div>
+
+                    <div class="form-group">
+                        <label for="exampleInputName2">خوب</label>
+                        <input type="checkbox" class="form-control" id="exampleInputName2">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName2">متوسط</label>
+                        <input type="checkbox" class="form-control" id="exampleInputName2">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName2">ضعیف</label>
+                        <input type="checkbox" class="form-control" id="exampleInputName2">
+                    </div>
+
+                </div>
+                <br>
+                توضیحات : ..................................
+                <p style="text-align: left;padding-left: 50px;">امضا</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1">
+                <div style="transform: rotate(-90deg);">ارزیابی نهایی</div>
+            </td>
+            <td colspan="11">
+                <div>
+
+                    <div class="form-group">
+                        <label for="exampleInputName2">وضعیت ظاهری داخل و خارج خودرو مطلوب می باشد:</label>
+                        <input type="checkbox" class="form-control" id="exampleInputName2">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName2">وضعیت ظاهری داخل و خارج خودرو مطلوب نمی باشد:</label>
+                        <input type="checkbox" class="form-control" id="exampleInputName2">
+                    </div>
+
+                </div>
+                <br>
+                نواقص و اشکالات : ............................
+                <br>
+                با توجه به ارزیابی به عمل امده صدور / تمدید دفترچه ی تردد بلامانع
+                <div>
+
+                    <div class="form-group">
+                        <label for="exampleInputName2"> می باشد:</label>
+                        <input type="checkbox" class="form-control" id="exampleInputName2">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName2"> نمی باشد:</label>
+                        <input type="checkbox" class="form-control" id="exampleInputName2">
+                    </div>
+
+                </div>
+                <br>
+                توضیحات : .......................
+                <p style="text-align: left; padding-left: 50px;"> {{RequesterModel.transportBoss}} <br> سرپرست مدیریت
+                    حمل و نقل عمومی
+                </p>
+            </td>
+        </tr>
+    </table>
+    <button class="btn btn-default" onclick="print1()">پرینت فرم ارزشیابی</button>
+
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    <script>
+        function print1() {
+            printJS({ printable: 'printForm', type: 'html', css: ['./styles/print.css'] });
+        }
+    </script>
+</form>

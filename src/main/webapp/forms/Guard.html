@@ -1,0 +1,125 @@
+<form class="container" role="form" dir="rtl">
+    <script cam-script type="text/form-script">
+        camForm.on('form-loaded',function(){
+          camForm.variableManager.fetchVariable('RequesterModel');
+          camForm.variableManager.fetchVariable('facePictureFile');
+        })
+        $scope.today = new Date();
+        camForm.on('variables-fetched', function() {
+          // after the variables are fetched, bind the value of RequesterModel to a angular
+          // scope value such that the form can work on it
+         $scope.RequesterModel = camForm.variableManager.variable('RequesterModel').value;
+         console.log('$scope.RequesterModel: ', $scope.RequesterModel);
+         });
+      </script>
+    <script cam-script type="text/form-script">
+        camForm.on('form-loaded',function(){
+          camForm.variableManager.fetchVariable('name');
+          camForm.variableManager.fetchVariable('lastName');
+          camForm.variableManager.fetchVariable('telephone');
+          camForm.variableManager.fetchVariable('code');
+          camForm.variableManager.fetchVariable('idCode');
+          camForm.variableManager.fetchVariable('vehicleType');
+          camForm.variableManager.fetchVariable('vehicleYear');
+          camForm.variableManager.fetchVariable('vehicleOwnerType'); 
+          camForm.variableManager.fetchVariable('plateNumber'); 
+          camForm.variableManager.fetchVariable('agancy'); 
+          camForm.variableManager.fetchVariable('processStartDate'); 
+          camForm.variableManager.fetchVariable('transportBoss'); 
+
+
+        })
+    
+        $scope.today = new Date();
+    
+        camForm.on('variables-fetched', function() {
+          // after the variables are fetched, bind the value of RequesterModel to a angular
+          // scope value such that the form can work on it
+    
+         $scope.RequesterModel = {
+            name :camForm.variableManager.variable('name').value,
+            lastName :camForm.variableManager.variable('lastName').value,
+            telephone :camForm.variableManager.variable('telephone').value,
+            code :camForm.variableManager.variable('code').value,
+            idCode :camForm.variableManager.variable('idCode').value,
+            vehicleType :camForm.variableManager.variable('vehicleType').value,
+            vehicleYear :camForm.variableManager.variable('vehicleYear').value,
+            vehicleOwnerType :camForm.variableManager.variable('vehicleOwnerType').value,
+            plateNumber :camForm.variableManager.variable('plateNumber').value,
+            agancy :camForm.variableManager.variable('agancy').value,
+            processStartDate :camForm.variableManager.variable('processStartDate').value,
+            transportBoss :camForm.variableManager.variable('transportBoss').value,
+
+
+    
+         }
+         
+         console.log('$scope.RequesterModel: ', $scope.RequesterModel);
+         });
+         console.log("lastName", camForm.variableManager.fetchVariable("lastName"));
+        </script>
+    <div>
+        <div class="rows">
+            <div class="flex-8">
+                <h1 style="text-align: right;">مدیریت محترم حراست شرکت عمران ٬ آب و خدمات منطقه آزاد کیش</h1>
+            </div>
+            <div class="flex-1 face-picture">
+                <img src="{{ camForm.variableManager.variable('facePictureFile').contentUrl }}"
+                    class="img-responsive">
+            </div>
+        </div>
+        <div class="rows">
+            <div class="flex-12">
+                <p>با سلام و احترام</p>
+                <p>بدینوسیله اقای : {{RequesterModel.name}} {{RequesterModel.lastName}} فرزند :
+                    {{RequesterModel.fatherName}} دارای شناسنامه شماره : {{RequesterModel.IdNum}} صادره از :
+                    {{RequesterModel.originatedLoc}} به تاریخ تشکیل پرونده : {{RequesterModel.processStartDate}}
+                    شماره تلفن :
+                    {{RequesterModel.telephone}} ساکن : {{RequesterModel.address}} متقاضی پروانه بره برداری کارت
+                    تردد رانندگی به عنوان مالک {{RequesterModel.vehicleOwnerType}} {{RequesterModel.vehicleType}} به
+                    شماره پلاک : {{RequesterModel.plateNumber}} کد : {{RequesterModel.code}} تحت پوشش شرکت :
+                    {{RequesterModel.agancy}} معرفی میگردد. خواهشمند است مقرر فرمایید ٬ ضمن صدور کارت کیشوندی ٬
+                    هرگونه نظریه در خصوص اجرای خواسته متقاضی را به این مدیریت اعلام دارند.</p>
+            </div>
+        </div>
+        <div class="rows">
+            <div class="flex-12">
+                <p style="text-align: left;"> {{RequesterModel.transportBoss}} <br> سرپرست مدیریت حمل و نقل عمومی
+                </p>
+
+            </div>
+        </div>
+        <hr>
+        <div class="rows">
+            <div class="flex-12">
+                <h3>نظریه صدور کارت :</h3>
+                <p>مدارک مورد نیاز آقای ........... با مشخصات بالا اخذ گردیده است لیکن به علت : ............. و در
+                    حال حاضر صدور کارت کیشوندی جهت نامبرده امکان پذیر می باشد.</p>
+            </div>
+        </div>
+        <div class="rows">
+            <div class="flex-12">
+                <p style="text-align: left;">مدیر صدور کارت کیشوند</p>
+            </div>
+        </div>
+        <hr>
+        <div class="rows">
+            <div class="flex-12">
+                <h3>رئیس محترم حمل و نقل عمومی</h3>
+                <p>صدور کارت جهت آقای ........ تا اطلاع ثانوی از نظر این واحد بلا مانع می باشد.</p>
+            </div>
+        </div>
+        <div class="rows">
+            <div class="flex-12">
+                <p style="text-align: left;"></p>مدیر حراست</p>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+
+
+
+
+</form>

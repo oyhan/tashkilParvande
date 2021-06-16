@@ -1,0 +1,96 @@
+<form class="container" role="form" dir="rtl">
+    <script cam-script type="text/form-script">
+        camForm.on('form-loaded',function(){
+          camForm.variableManager.fetchVariable('RequesterModel');
+          camForm.variableManager.fetchVariable('facePictureFile');
+        })
+        $scope.today = new Date();
+        camForm.on('variables-fetched', function() {
+          // after the variables are fetched, bind the value of RequesterModel to a angular
+          // scope value such that the form can work on it
+         $scope.RequesterModel = camForm.variableManager.variable('RequesterModel').value;
+         console.log('$scope.RequesterModel: ', $scope.RequesterModel);
+         });
+      </script>
+    <script cam-script type="text/form-script">
+        camForm.on('form-loaded',function(){
+          camForm.variableManager.fetchVariable('name');
+          camForm.variableManager.fetchVariable('lastName');
+          camForm.variableManager.fetchVariable('telephone');
+          camForm.variableManager.fetchVariable('code');
+          camForm.variableManager.fetchVariable('idCode');
+          camForm.variableManager.fetchVariable('vehicleType');
+          camForm.variableManager.fetchVariable('vehicleYear');
+          camForm.variableManager.fetchVariable('vehicleOwnerType'); 
+          camForm.variableManager.fetchVariable('plateNumber'); 
+          camForm.variableManager.fetchVariable('agancy'); 
+          camForm.variableManager.fetchVariable('transportBoss'); 
+
+        })
+    
+        $scope.today = new Date();
+    
+        camForm.on('variables-fetched', function() {
+          // after the variables are fetched, bind the value of RequesterModel to a angular
+          // scope value such that the form can work on it
+    
+         $scope.RequesterModel = {
+            name :camForm.variableManager.variable('name').value,
+            lastName :camForm.variableManager.variable('lastName').value,
+            telephone :camForm.variableManager.variable('telephone').value,
+            code :camForm.variableManager.variable('code').value,
+            idCode :camForm.variableManager.variable('idCode').value,
+            vehicleType :camForm.variableManager.variable('vehicleType').value,
+            vehicleYear :camForm.variableManager.variable('vehicleYear').value,
+            vehicleOwnerType :camForm.variableManager.variable('vehicleOwnerType').value,
+            plateNumber :camForm.variableManager.variable('plateNumber').value,
+            agancy :camForm.variableManager.variable('agancy').value,
+            transportBoss :camForm.variableManager.variable('transportBoss').value,
+
+    
+         }
+         
+         console.log('$scope.RequesterModel: ', $scope.RequesterModel);
+         });
+         console.log("lastName", camForm.variableManager.fetchVariable("lastName"));
+        </script>
+    <div>
+        <div class="rows">
+            <div class="flex-8">
+                <h1 style="text-align: right;">رییس محترم تامین اجتماعی کیش</h1>
+            </div>
+            <div class="flex-1 face-picture">
+                <img src="{{ camForm.variableManager.variable('facePictureFile').contentUrl }}"
+                    class="img-responsive">
+            </div>
+        </div>
+        <div class="rows">
+            <div class="flex-12">
+                <p>با سلام و احترام</p>
+                <p>به اطلاع می رساند اقای : {{RequesterModel.name}} {{RequesterModel.lastName}} فرزند :
+                    {{RequesterModel.fatherName}} دارای شناسنامه شماره : {{RequesterModel.IdNum}} صادره از :
+                    {{RequesterModel.originatedLoc}} متولد : {{RequesterModel.birthdate | camDate:'short'}} به عنوان
+                    راننده {{RequesterModel.vehicleOwnerType}} {{RequesterModel.vehicleType}} شماره پلاک : {{RequesterModel.plateNumber}} عمومی٬ تحت پوشش آژانس :
+                    {{RequesterModel.agancy}} کیش٬ جهت تمدید بیمه رانندگان حمل و نقل عمومی درون شهری معرفی
+                    میگردد.خواهشمند است مقرر فرمایید اقدامات لازم مبذول دارند. بدیهی است حق بیمه متعلقه توسط متقاضی
+                    پرداخت خواهد شد و این معرفینامه هیچ گونه تعهدی برای این مدیریت ایجاد نخواهد نمود. در ضمن اعتبار
+                    مجوز
+                    تردد نامبرده از تاریخ صدور این نامه به مدت شش ماه می باشد.</p>
+            </div>
+        </div>
+        <div class="rows">
+            <div class="flex-12">
+                <p style="text-align: left;">{{RequesterModel.transportBoss}} <br> سرپرست مدیریت حمل و نقل عمومی</p>
+
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+
+
+
+
+
+</form>

@@ -1,58 +1,77 @@
+<link href="./styles/print.css  " rel="stylesheet" media="all">
 <form class="" role="form">
+
     <script cam-script type="text/form-script">
+        camForm.on('form-loaded',function(){
+         
+         
+          })
+          
         $scope.open = function($event) {
             
             $event.preventDefault();
             $event.stopPropagation();
             $scope.referralDate = true
           };
+          
         camForm.on('form-loaded',function(){
-          camForm.variableManager.fetchVariable('RequesterModel');
-          camForm.variableManager.fetchVariable('facePictureFile');
+
+        
+             camForm.variableManager.fetchVariable('birthdate');
+            camForm.variableManager.fetchVariable('drivingLicenseIssueDate');
+           camForm.variableManager.fetchVariable('facePictureFile');
         })
-        $scope.model= {
-        };
+        
+        camForm.on('variables-fetched',function(){
+            $scope.RequesterModel = {
+         
+                birthdate :camForm.variableManager.variable('birthdate').value,
+                drivingLicenseIssueDate :camForm.variableManager.variable('drivingLicenseIssueDate').value,
+          
+             }
+        })
+
         $scope.approved = false;
         $scope.isApproved =function(){
              $scope.approved = ! $scope.approved;
          }
+
+         camForm.on('submit', function(evt) {
+             var dateFarsi = new Date($("#referralDate").val().split('T')[0]).toLocaleDateString("fa-IR");
+           camForm.variableManager.createVariable({
+             name: 'referralDateFarsi',
+             type : 'String',
+             value : dateFarsi
+           })
+
+          
+          });
+
+
         camForm.on('variables-fetched', function() {
-            var requesterModel =  camForm.variableManager.variable('RequesterModel').value ;
-            camForm.variableManager.createVariable({
-                name: 'name',
-                type: 'String',
-               
-                value: requesterModel.name,
-                
-              });
-              camForm.variableManager.createVariable({
-                name: 'lastName',
-                type: 'String',
-               
-                value:  requesterModel.lastName,
-                
-              });
-            
-          // after the variables are fetched, bind the value of RequesterModel to a angular
-          // scope value such that the form can work on it
-         $scope.RequesterModel = camForm.variableManager.variable('RequesterModel').value;
-            
+           
          });
       </script>
     <p>آیا مدارک مورد تایید است؟</p>
-    <div class="form-group">
-        <label class="control-label col-md-2">تصویر از تمام صفحات شناسنامه متقاضی</label>
-        <div class="form-control-static col-md-10">
-            <a cam-file-download="shenasnamehFile"></a>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">عکس 3در4</label>
-        <div class="form-control-static col-md-10">
-            <div class="col-md-6">
-                <img src="{{ camForm.variableManager.variable('facePictureFile').contentUrl }}" class="img-responsive">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="control-label col-md-4">تصویر از تمام صفحات شناسنامه متقاضی</label>
+                <div class="form-control-static col-md-8">
+                    <a cam-file-download="shenasnamehFile"></a>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">عکس 3در4</label>
+                <div class="form-control-static col-md-10 logo">
+                    <div class="col-md-6">
+                        <img src="{{ camForm.variableManager.variable('facePictureFile').contentUrl }}"
+                            class="img-responsive">
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
     <!-- <div class="form-group">
     <label class="control-label col-md-2">تصویر از تمام صفحات شناسنامه همسر</label>
@@ -106,7 +125,7 @@
                             <label class="control-label" for="UserID">شماره پلاک</label>
                             <div class="controls">
                                 <input id="plateNumber" class="form-control" type="text" required
-                                    ng-model="RequesterModel.plateNumber" ng-model-options="{debounce: 500}">
+                                    cam-variable-name="plateNumber" ng-model-options="{debounce: 500}">
                             </div>
                         </div>
                     </div>
@@ -114,8 +133,8 @@
                         <div class="form-group">
                             <label class="control-label" for="code">کد</label>
                             <div class="controls">
-                                <input id="code" class="form-control" type="text" required
-                                    ng-model="RequesterModel.code" ng-model-options="{debounce: 500}">
+                                <input id="code" class="form-control" type="text" required cam-variable-name="code"
+                                    ng-model-options="{debounce: 500}">
                             </div>
                         </div>
                     </div>
@@ -123,8 +142,8 @@
                         <div class="form-group">
                             <label class="control-label" for="agancy">آژانس</label>
                             <div class="controls">
-                                <input id="agancy" class="form-control" type="text" required
-                                    ng-model="RequesterModel.agancy" ng-model-options="{debounce: 500}">
+                                <input id="agancy" class="form-control" type="text" required cam-variable-name="agancy"
+                                    ng-model-options="{debounce: 500}">
                             </div>
                         </div>
                     </div>
@@ -132,8 +151,8 @@
                         <div class="form-group">
                             <label class="control-label" for="idCode">کد شناسایی</label>
                             <div class="controls">
-                                <input id="idCode" class="form-control" type="text" required
-                                    ng-model="RequesterModel.idCode" ng-model-options="{debounce: 500}">
+                                <input id="idCode" class="form-control" type="text" required cam-variable-name="idCode"
+                                    ng-model-options="{debounce: 500}">
                             </div>
                         </div>
                     </div>
@@ -142,7 +161,7 @@
                             <label class="control-label" for="vehicleType">نوع خودرو عمومی</label>
                             <div class="controls">
                                 <input id="vehicleType" class="form-control" type="text" required
-                                    ng-model="RequesterModel.vehicleType" ng-model-options="{debounce: 500}">
+                                    cam-variable-name="vehicleType" ng-model-options="{debounce: 500}">
                             </div>
                         </div>
                     </div>
@@ -151,26 +170,26 @@
                             <label class="control-label" for="vehicleYear">سال تولید خودرو</label>
                             <div class="controls">
                                 <input id="vehicleYear" class="form-control" type="text" required
-                                    ng-model="RequesterModel.vehicleYear" ng-model-options="{debounce: 500}">
+                                    cam-variable-name="vehicleYear" ng-model-options="{debounce: 500}">
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-xs-12 ">
+                    <!-- <div class="col-lg-6 col-md-6 col-xs-12 ">
                         <div class="form-group">
                             <label class="radio-inline">
-                                <input type="radio" name="vehicleOwnerType" ng-model="RequesterModel.vehicleOwnerType"
+                                <input type="radio" name="vehicleOwnerType" cam-variable-name="vehicleOwnerType"
                                     id="inlineCheckbox1" value="مالک شش دانگ"> مالک شش دانگ
                             </label>
                             <label class="checkbox-inline">
-                                <input type="radio" name="vehicleOwnerType" ng-model="RequesterModel.vehicleOwnerType"
+                                <input type="radio" name="vehicleOwnerType" cam-variable-name="vehicleOwnerType"
                                     id="inlineCheckbox2" value="مالک سه دانگ"> مالک سه دانگ
                             </label>
                             <label class="checkbox-inline">
-                                <input type="radio" name="vehicleOwnerType" ng-model="RequesterModel.vehicleOwnerType"
+                                <input type="radio" name="vehicleOwnerType" cam-variable-name="vehicleOwnerType"
                                     id="inlineCheckbox3" value="راننده کمکی"> راننده کمکی
                             </label>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -180,201 +199,211 @@
                 <div class="panel-body">
                     <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="name">نام</label>
                             <div class="controls">
-                                <input id="name" placeholder="نام" class="form-control" type="text" required
-                                    ng-model="RequesterModel.name">
+                                <input id="name" class="form-control" type="text" required cam-variable-name="name">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="lastName">نام خانوادگی</label>
                             <div class="controls">
-                                <input id="lastName" placeholder="نام خانوادگی" class="form-control" type="text"
-                                    required ng-model="RequesterModel.lastName">
+                                <input id="lastName" class="form-control" type="text" required
+                                    cam-variable-name="lastName">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="fatherName">نام پدر</label>
                             <div class="controls">
-                                <input id="fatherName" placeholder="نام پدر" class="form-control" type="text" required
-                                    ng-model="RequesterModel.fatherName">
+                                <input id="fatherName" class="form-control" type="text" required
+                                    cam-variable-name="fatherName">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="IdNum">شماره شناسنامه</label>
                             <div class="controls">
-                                <input id="IdNum" placeholder="شماره شناسنامه" class="form-control" type="text" required
-                                    ng-model="RequesterModel.IdNum">
+                                <input id="IdNum" class="form-control" type="text" required cam-variable-name="IdNum">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="birthdate">تاریخ تولد</label>
                             <div class="controls">
-                                <input id="birthdate" placeholder="تاریخ تولد" class="form-control" type="text"
-                                    value="{{RequesterModel.birthdate | camDate:'year'}}" required />
+                                <input id="birthdate" class="form-control" type="text"
+                                    value="{{RequesterModel.birthdate | camDate:'short'}}" required required />
+
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="originatedLoc">محل صدور</label>
                             <div class="controls">
-                                <input id="originatedLoc" placeholder="محل صدور" class="form-control" type="text"
-                                    required ng-model="RequesterModel.originatedLoc">
+                                <input id="originatedLoc" class="form-control" type="text" required
+                                    cam-variable-name="originatedLoc">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="education">میزان تحصیلات</label>
                             <div class="controls">
-                                <input id="education" placeholder="میزان تحصیلات" class="form-control" type="text"
-                                    required ng-model="RequesterModel.education">
+                                <input id="education" class="form-control" type="text" required
+                                    cam-variable-name="education">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="religious">مذهب</label>
                             <div class="controls">
-                                <input id="religious" placeholder="مذهب" class="form-control" type="text" required
-                                    ng-model="RequesterModel.religious">
+                                <input id="religious" class="form-control" type="text" required
+                                    cam-variable-name="religious">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="nationalCode">شماره ملی</label>
                             <div class="controls">
-                                <input id="nationalCode" placeholder="شماره ملی" class="form-control" type="text"
-                                    required ng-model="RequesterModel.nationalCode">
+                                <input id="nationalCode" class="form-control" type="text" required
+                                    cam-variable-name="nationalCode">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="drivingLicenseType">نوع گواهینامه</label>
                             <div class="controls">
-                                <input id="drivingLicenseType" placeholder="نوع گواهی نامه" class="form-control"
-                                    type="text" required ng-model="RequesterModel.drivingLicenseType">
+                                <input id="drivingLicenseType" class="form-control" type="text" required
+                                    cam-variable-name="drivingLicenseType">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="drivingLicenseTypeNumber">شماره گواهینامه</label>
                             <div class="controls">
-                                <input id="drivingLicenseTypeNumber" placeholder="شماره گواهی نامه" class="form-control"
-                                    type="text" required ng-model="RequesterModel.drivingLicenseTypeNumber">
+                                <input id="drivingLicenseTypeNumber" class="form-control" type="text" required
+                                    cam-variable-name="drivingLicenseTypeNumber">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="drivingLicenseIssue">صادره</label>
                             <div class="controls">
-                                <input id="drivingLicenseIssue" placeholder="صادره" class="form-control" type="text"
-                                    required ng-model="RequesterModel.drivingLicenseIssue">
+                                <input id="drivingLicenseIssue" class="form-control" type="text" required
+                                    cam-variable-name="drivingLicenseIssue">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="drivingLicenseIssueDate">تاریخ صدور گواهینامه</label>
                             <div class="controls">
-                                <input id="drivingLicenseIssueDate" placeholder="تاریخ صدور گواهینامه"
-                                    class="form-control" type="text" required
-                                    value="{{RequesterModel.drivingLicenseIssueDate | camDate }}">
+                                <input id="drivingLicenseIssueDate" class="form-control" type="text" required
+                                    value="{{RequesterModel.drivingLicenseIssueDate | camDate:'short'}}">
                             </div>
                         </div>
                     </div>
-                   
+
                     <div class="col-lg-4 col-md-4 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="kishAddress">آدرس در جزیره کیش</label>
                             <div class="controls">
-                                <input id="kishAddress" placeholder="آدرس در جزیره کیش" class="form-control" type="text"
-                                    required ng-model="RequesterModel.kishAddress">
+                                <input id="kishAddress" class="form-control" type="text" required
+                                    cam-variable-name="kishAddress">
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-2 col-xs-12 ">
+                    <!-- <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
                             <div class="controls">
                                 <input id="kishTelephone" placeholder="تلفن تماس کیش" class="form-control" type="text"
-                                    required ng-model="RequesterModel.kishTelephone">
+                                    required cam-variable-name="kishTelephone">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-lg-4 col-md-4 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="address">آدرس خارج از جزیره کیش</label>
                             <div class="controls">
-                                <input id="address" placeholder="آدرس خارج از کیش" class="form-control" type="text"
-                                    required ng-model="RequesterModel.address">
+                                <input id="address" class="form-control" type="text" required
+                                    cam-variable-name="address">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-xs-12 ">
                         <div class="form-group">
+                            <label class="control-label" for="telephone">شماره تماس</label>
                             <div class="controls">
-                                <input id="telephone" placeholder="شماره تماس خارج از کیش" class="form-control"
-                                    type="text" required ng-model="RequesterModel.telephone">
+                                <input id="telephone" class="form-control" type="text" required
+                                    cam-variable-name="telephone">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-            <div class="col-md-10 col-md-offset-2">
-                <div class="checkbox">
-                    <label>
-                        <input ng-click="isApproved()" cam-variable-name="approved" cam-variable-type="Boolean"
-                            type="checkbox" name="approved" class="form-control" />
-                        آیا مورد تایید است؟
-                    </label>
+        <div class="col-md-10 col-md-offset-2">
+            <div class="checkbox">
+                <label>
+                    <input ng-click="isApproved()" cam-variable-name="approved" cam-variable-type="Boolean"
+                        type="checkbox" name="approved" class="form-control" />
+                    آیا مورد تایید است؟
+                </label>
+            </div>
+        </div>
+        <div ng-show='!approved' class="col-lg-6 col-md-6 col-xs-12 ">
+            <div class="form-group">
+                <label class="control-label" for="rejectReason">توضحیات رد پرونده</label>
+                <div class="controls">
+                    <input id="rejectReason" class="form-control" cam-variable-name="rejectReason"
+                        cam-variable-type="String" type="textarea" ng-required='!approved'
+                        ng-model-options="{debounce: 500}">
                 </div>
             </div>
-            <div ng-show='!approved' class="col-lg-6 col-md-6 col-xs-12 ">
+        </div>
+        <div class="col-md-6">
+            <div ng-show='approved' ng-disabled='!approved' class="">
                 <div class="form-group">
-                    <label class="control-label" for="rejectReason">توضحیات رد پرونده</label>
-                    <div class="controls">
-                        <input id="rejectReason" class="form-control" cam-variable-name="rejectReason"
-                            cam-variable-type="String" type="textarea" ng-required='!approved'
-                            ng-model-options="{debounce: 500}">
+                    <div class="input-group">
+                        <label class="control-label" for="referralDate">تاریخ رجوع</label>
+                        <input uib-datepicker-popup="yyyy/MM/ddThh:mm" show-button-bar="false" ng-click="open($event)"
+                            is-open="referralDate" cam-variable-name="referralDate" cam-variable-type="String"
+                            ng-required='approved' id="referralDate" type="hidden" required
+                            ng-model="model.referralDate">
+                        <input type="text" ng-click="open($event)" placeholder="تاریخ رجوع" class="form-control"
+                            value="{{model.referralDate | camDate:'short'}}">
                     </div>
                 </div>
             </div>
-                <div class="col-md-6">
-                    <div ng-show='approved' ng-disabled='!approved' class="">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <label class="control-label" for="referralDate">تاریخ رجوع</label>
-                                <input uib-datepicker-popup="yyyy/MM/ddThh:mm" show-button-bar="false" ng-click="open($event)"
-                                    is-open="referralDate" cam-variable-name="referralDate" cam-variable-type="String"
-                                    ng-required='approved'
-                                    id="referralDate" type="hidden" required ng-model="model.referralDate">
-                                <input type="text" ng-click="open($event)"  placeholder="تاریخ رجوع" class="form-control"
-                                    value="{{model.referralDate | camDate:'short'}}">
-                            </div>
-                        </div>
+        </div>
+        <div class="col-md-6">
+            <div ng-show='approved'>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label class="control-label" for="referralTime">زمان مراجعه</label>
+                        <input id="referralTime" cam-variable-name="referralTime" cam-variable-type="String"
+                            placeholder="زمان مراجعه" class="form-control" type="text" ng-required='approved'>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div ng-show='approved' >
-                        <div class="form-group">
-                            <div class="input-group">
-                                <label class="control-label" for="referralTime">زمان مراجعه</label>
-                                <input id="referralTime" 
-                                cam-variable-name="referralTime" cam-variable-type="String"
-                                placeholder="زمان مراجعه" class="form-control" type="text"
-                                ng-required='approved' >
-                            </div>
-                        </div>
-                    </div>
+            </div>
+        </div>
+        <div ng-show='approved' class="col-xs-12 ">
+            <div class="form-group">
+                <label class="control-label" for="considerations">ملاحظات</label>
+                <div class="controls">
+                    <textarea id="considerations" class="form-control" cam-variable-name="considerations"
+                        cam-variable-type="String" type="textarea"></textarea>
                 </div>
-                <div ng-show='approved' class="col-xs-12 ">
-                    <div class="form-group">
-                        <label class="control-label" for="considerations">ملاحظات</label>
-                        <div class="controls">
-                            <textarea  id="considerations" class="form-control" cam-variable-name="considerations"
-                                cam-variable-type="String" type="textarea" 
-                               >
-                                </textarea> 
-                        </div>
-                    </div>
-                </div>
+            </div>
+        </div>
 </form>

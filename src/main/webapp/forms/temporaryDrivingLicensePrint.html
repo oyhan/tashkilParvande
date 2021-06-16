@@ -1,0 +1,160 @@
+<link rel="stylesheet" href="./styles/print.css">
+<form action="" class="form-inline">
+    <script cam-script type="text/form-script">
+        camForm.on('form-loaded',function(){
+          camForm.variableManager.fetchVariable('facePictureFile');
+          camForm.variableManager.fetchVariable('idCode');
+          camForm.variableManager.fetchVariable('IdNum');
+          camForm.variableManager.fetchVariable('nationalCode');
+          camForm.variableManager.fetchVariable('lastName');
+          camForm.variableManager.fetchVariable('name');
+          camForm.variableManager.fetchVariable('originatedLoc');
+          camForm.variableManager.fetchVariable('birthdate');
+          camForm.variableManager.fetchVariable('fatherName');
+          camForm.variableManager.fetchVariable('address');
+          camForm.variableManager.fetchVariable('telephone');
+          camForm.variableManager.fetchVariable('religious');
+          camForm.variableManager.fetchVariable('drivingLicenseType');
+          camForm.variableManager.fetchVariable('drivingLicenseIssueDate');
+          camForm.variableManager.fetchVariable('vehicleYear');
+          camForm.variableManager.fetchVariable('transportBoss');
+        })
+
+        $scope.open = function($event,key) {
+            $event.preventDefault();
+            $event.stopPropagation();
+             if(key===1)
+              $scope.licenseFromDate = true
+            else  
+                $scope.licenseToDate = true
+           
+           
+          };
+        $scope.today = new Date();
+    
+        camForm.on('variables-fetched', function() {
+          // after the variables are fetched, bind the value of RequesterModel to a angular
+          // scope value such that the form can work on it
+    
+         $scope.RequesterModel = {
+            transportBoss :camForm.variableManager.variable('transportBoss').value,
+            idCode :camForm.variableManager.variable('idCode').value,
+            fatherName :camForm.variableManager.variable('fatherName').value,
+            fatherName :camForm.variableManager.variable('fatherName').value,
+            birthdate :camForm.variableManager.variable('birthdate').value,
+            originatedLoc :camForm.variableManager.variable('originatedLoc').value,
+            name :camForm.variableManager.variable('name').value,
+            nationalCode :camForm.variableManager.variable('nationalCode').value,
+            IdNum :camForm.variableManager.variable('IdNum').value,
+            address :camForm.variableManager.variable('address').value,
+            telephone :camForm.variableManager.variable('telephone').value,
+            religious :camForm.variableManager.variable('religious').value,
+            drivingLicenseType :camForm.variableManager.variable('drivingLicenseType').value,
+            drivingLicenseIssueDate :camForm.variableManager.variable('drivingLicenseIssueDate').value,
+            vehicleYear :camForm.variableManager.variable('vehicleYear').value,
+         }
+    
+         console.log('$scope.RequesterModel: ', $scope.RequesterModel);
+         });
+        </script>
+    <div id="printForm" class="printable" dir="rtl">
+        <header>
+            <div class="rows">
+                <div class="flex-8 logo">
+                    <img src="./assets/logo.png" alt="">
+                </div>
+                <div class="flex-10 info">
+                    <div class="rows">
+                        <div class="flex-12">
+                            <span>شماره:</span> <span>----------------------</span>
+                            <span>تاریخ:</span> <span> {{ today | camDate :'short'}}</span>
+                            <span> پیوست:</span> <span> ندارد</span>
+                        </div>
+                    </div>
+                    <div class="rows">
+                        <div class="flex-12">
+                            <span>کد اقتصادی:</span> <span>4111-4644-8464</span>
+                            <span>شناسه ملی:</span> <span>10861524783</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="rows">
+            <div class="flex-8">
+                <h5>کدشناسایی : {{RequesterModel.idCode}}</h5>
+                <h2> ((گواهی موقت رانندگی))</h2>
+            </div>
+            <div class="flex-2"></div>
+            <div class="flex-2 face-picture">
+                <img src="{{ camForm.variableManager.variable('facePictureFile').contentUrl }}" class="img-responsive">
+            </div>
+        </div>
+        <div class="rows">
+            <p>
+                بدینویسیله گواهی می‌شود آقای {{RequesterModel.name}} {{RequesterModel.lastName}} فرزند
+                {{RequesterModel.fatherName}}
+                به شماره شناسنامه {{RequesterModel.IdNum}} صادره از {{RequesterModel.originatedLoc}} با کدملی
+                {{RequesterModel.nationalCode}}
+                متولد {{RequesterModel.birthdate | camDate:'short'}} دارنده گواهینامه
+                {{RequesterModel.drivingLicenseType}}
+                به تاریخ صدور
+                {{RequesterModel.drivingLicenseIssueDate}} به عنوان مالک {{RequesterModel.vehicleOwnerType}}
+                {{RequesterModel.vehicleType}}
+                {{RequesterModel.brandName}} مدل {{RequesterModel.vehicleYear}} به شماره پلاک
+                {{RequesterModel.plateNumber}}
+                کد {{RequesterModel.code}}
+                تحت پوشش شرکت {{RequesterModel.agancy}} فعالیت می نماید.نامبرده از مورخ {{model.licenseFromDate |
+                camDate:'short'}} لغایت {{model.licenseToDate | camDate:'short'}}
+                مجوز
+                فعالیت در ناوگان حمل و نقل عمومی را دارد .
+
+            </p>
+        </div>
+        <footer>
+            <div class="rows">
+                <div class="flex-10">
+                </div>
+                <div class="">
+                    <p><b>{{RequesterModel.transportBoss}}</b></p>
+                    <p style="
+                    text-indent: -28px;
+                "><b>سرپرست مدریت حمل و نقل عمومی</b></p>
+                </div>
+            </div>
+            <p>((فرهنگ خوب راندن،توام با احترام را در جزیره زیبای کیش تجربه نمائیم))</p>
+        </footer>
+    </div>
+
+    <div class="form-group">
+        <label for="licenseFromDate">بازه زمانی مجوز از تاریخ </label>
+        <input uib-datepicker-popup="yyyy/MM/ddThh:mm" show-button-bar="false" ng-click="open($event)"
+            is-open="licenseFromDate" cam-variable-name="licenseFromDate" cam-variable-type="String"
+            ng-required='approved' id="referralDate" type="hidden" required ng-model="model.licenseFromDate">
+        <input type="text" ng-click="open($event,1)" placeholder="ازتاریخ" class="form-control"
+            value="{{model.licenseFromDate | camDate:'short'}}">
+    </div>
+    <div class="form-group">
+        <label for="licenseToDate">تا تاریخ</label>
+        <input uib-datepicker-popup="yyyy/MM/ddThh:mm" show-button-bar="false" ng-click="open($event)"
+            is-open="licenseToDate" cam-variable-name="licenseToDate" cam-variable-type="String" ng-required='approved'
+            id="licenseToDate" type="hidden" required ng-model="model.licenseToDate">
+        <input type="text" ng-click="open($event,2)" placeholder="تا تاریخ" class="form-control"
+            value="{{model.licenseToDate | camDate:'short'}}">
+    </div>
+    <button ng-show="model.licenseToDate && model.licenseFromDate" class="btn btn-default" onclick="print1()">صدور گواهی موقت</button>
+
+
+
+
+
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    <script>
+        function print1() {
+            $("#printForm").show();
+            printJS({ printable: 'printForm', type: 'html', css: ['./styles/print2.css'] });
+            $("#printForm").hide();
+        }
+
+    </script>
+</form>

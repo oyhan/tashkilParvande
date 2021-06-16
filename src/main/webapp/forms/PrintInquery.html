@@ -3,17 +3,44 @@
 <form class="" role="form">
     <script cam-script type="text/form-script">
         camForm.on('form-loaded',function(){
-          camForm.variableManager.fetchVariable('RequesterModel');
+          camForm.variableManager.fetchVariable('transportBoss');
           camForm.variableManager.fetchVariable('facePictureFile');
+          camForm.variableManager.fetchVariable('IdNum');
+          camForm.variableManager.fetchVariable('nationalCode');
+          camForm.variableManager.fetchVariable('lastName');
+          camForm.variableManager.fetchVariable('name');
+          camForm.variableManager.fetchVariable('originatedLoc');
+          camForm.variableManager.fetchVariable('birthdate');
+          camForm.variableManager.fetchVariable('fatherName');
+          camForm.variableManager.fetchVariable('address');
+          camForm.variableManager.fetchVariable('telephone');
+          camForm.variableManager.fetchVariable('religious');
         })
+
         $scope.today = new Date();
+
         camForm.on('variables-fetched', function() {
           // after the variables are fetched, bind the value of RequesterModel to a angular
           // scope value such that the form can work on it
-         $scope.RequesterModel = camForm.variableManager.variable('RequesterModel').value;
+
+         $scope.RequesterModel = {
+            transportBoss :camForm.variableManager.variable('transportBoss').value,
+            lastName :camForm.variableManager.variable('lastName').value,
+            fatherName :camForm.variableManager.variable('fatherName').value,
+            birthdate :camForm.variableManager.variable('birthdate').value,
+            originatedLoc :camForm.variableManager.variable('originatedLoc').value,
+            name :camForm.variableManager.variable('name').value,
+            nationalCode :camForm.variableManager.variable('nationalCode').value,
+            IdNum :camForm.variableManager.variable('IdNum').value,
+            address :camForm.variableManager.variable('address').value,
+            telephone :camForm.variableManager.variable('telephone').value,
+            religious :camForm.variableManager.variable('religious').value,
+         }
+
          console.log('$scope.RequesterModel: ', $scope.RequesterModel);
          });
-      </script>
+        </script>
+
     <div id="print-rahnamai" class="container printable" dir="rtl">
         <header>
             <div class="rows">
@@ -70,7 +97,7 @@
                 <div class="flex-10">
                 </div>
                 <div class="">
-                    <p><b>حسن‌ محمد‌علی‌پور</b></p>
+                    <p><b>{{RequesterModel.transportBoss}}</b></p>
                     <p style="
                     text-indent: -28px;
                 "><b>سرپرست مدریت حمل و نقل عمومی</b></p>
@@ -136,7 +163,7 @@
                 <div class="flex-10">
                 </div>
                 <div class="">
-                    <p><b>حسن‌ محمد‌علی‌پور</b></p>
+                    <p><b>{{RequesterModel.transportBoss}}</b></p>
                     <p style="
                     text-indent: -28px;
                 "><b>سرپرست مدریت حمل و نقل عمومی</b></p>
@@ -172,14 +199,15 @@
                 <div class="flex-10 title">
                     <p>ریاست محترم اداره پلیس + 10 کیش</p>
                 </div>
-                
+
             </div>
             <div class="container">
                 <div class="rows">
                     <div class="flex-12">
                         <p class="first-line">با سلام و احترام</p>
                         <p>
-                            بدینوسلیه آقای: <strong>{{RequesterModel.name}} {{RequesterModel.lastName}}</strong> با مشخصات سجلی ذیل که
+                            بدینوسلیه آقای: <strong>{{RequesterModel.name}} {{RequesterModel.lastName}}</strong> با
+                            مشخصات سجلی ذیل که
                             متقاضی دریافت کارت
                             تردد تاکسیرانی در این شرکت می باشد جهت انگشت نگاری و استعلام سوابق کیفری بحضور معرفی
                             میگردد.دستور فرمایید نتیجه بررسی های به عمل آمده را جهت بهره برداری و درج در پرونده صنفی وی
@@ -188,9 +216,10 @@
                         </p>
                         <table border="1">
                             <tr>
-                                <td colspan="4">نام خانوادگی: {{RequesterModel.lastName}}</td>
+                                <td colspan="4">نام خانوادگی:{{RequesterModel.lastName}}</td>
                                 <td colspan="4">نام: {{RequesterModel.name}}</td>
-                                <td colspan="4">کدملی: {{RequesterModel.nationalCode}}</td>
+                                <td colspan="4">کدملی:  {{RequesterModel.nationalCode}}
+                                </td>
                             </tr>
                             <tr>
                                 <th colspan="2">نام خانوادگی قبلی</th>
@@ -227,7 +256,7 @@
                             <tr>
                                 <td colspan="8">
                                     <p> نشانی و محل سکونت : {{RequesterModel.address}} </p>
-                                    <p>تلفن : {{RequesterModel.kishTelephone}}</p>
+                                    <p>تلفن : {{RequesterModel.telephone}}</p>
                                 </td>
                                 <td rowspan="2" colspan="4">
                                     <div class="rows centered face-picture">
@@ -249,7 +278,7 @@
                 <div class="flex-10">
                 </div>
                 <div class="">
-                    <p><b>حسن‌ محمد‌علی‌پور</b></p>
+                    <p><b>{{RequesterModel.transportBoss}}</b></p>
                     <p style="
                     text-indent: -28px;
                 "><b>سرپرست مدریت حمل و نقل عمومی</b></p>

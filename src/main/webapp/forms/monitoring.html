@@ -1,0 +1,88 @@
+<form class="container" role="form" dir="rtl">
+    <script cam-script type="text/form-script">
+      </script>
+    <script cam-script type="text/form-script">
+        camForm.on('form-loaded',function(){
+          camForm.variableManager.fetchVariable('facePictureFile');
+          camForm.variableManager.fetchVariable('IdNum');
+          camForm.variableManager.fetchVariable('nationalCode');
+          camForm.variableManager.fetchVariable('lastName');
+          camForm.variableManager.fetchVariable('name');
+          camForm.variableManager.fetchVariable('originatedLoc');
+          camForm.variableManager.fetchVariable('birthdate');
+          camForm.variableManager.fetchVariable('fatherName');
+          camForm.variableManager.fetchVariable('address');
+          camForm.variableManager.fetchVariable('telephone');
+          camForm.variableManager.fetchVariable('religious');
+          camForm.variableManager.fetchVariable('drivingLicenseType');
+          camForm.variableManager.fetchVariable('drivingLicenseIssueDate');
+          camForm.variableManager.fetchVariable('vehicleYear');
+        })
+    
+        $scope.today = new Date();
+    
+        camForm.on('variables-fetched', function() {
+          // after the variables are fetched, bind the value of RequesterModel to a angular
+          // scope value such that the form can work on it
+    
+         $scope.RequesterModel = {
+            lastName :camForm.variableManager.variable('lastName').value,
+            fatherName :camForm.variableManager.variable('fatherName').value,
+            birthdate :camForm.variableManager.variable('birthdate').value,
+            originatedLoc :camForm.variableManager.variable('originatedLoc').value,
+            name :camForm.variableManager.variable('name').value,
+            nationalCode :camForm.variableManager.variable('nationalCode').value,
+            IdNum :camForm.variableManager.variable('IdNum').value,
+            address :camForm.variableManager.variable('address').value,
+            telephone :camForm.variableManager.variable('telephone').value,
+            religious :camForm.variableManager.variable('religious').value,
+            drivingLicenseType :camForm.variableManager.variable('drivingLicenseType').value,
+            drivingLicenseIssueDate :camForm.variableManager.variable('drivingLicenseIssueDate').value,
+            vehicleYear :camForm.variableManager.variable('vehicleYear').value,
+         }
+    
+         console.log('$scope.RequesterModel: ', $scope.RequesterModel);
+         });
+        </script>
+    <div id="printFrom" class="printable">
+
+        <div class="rows">
+            <div class="flex-12">
+                <h5 style="text-align: center;">
+                    ریاست محترم اداره نظارت بر اماکن عمومی ویژه کیش
+                </h5>
+                <h5>با سلام</h5>
+            </div>
+
+            <div class="rows">
+                <p>
+                    احتراما بدینوسیله گواهی می گردد آقای : {{RequesterModel.name}} {{RequesterModel.lastName}} فرزند
+                    : {{RequesterModel.fatherName}} شماره شناسنامه : {{RequesterModel.IdNum}} تاریخ تولد :
+                    {{RequesterModel.birthdate | camDate:'short'}} صادره از : {{RequesterModel.originatedLoc}} از
+                    تاریخ : .......... لغایت : ..........
+                    به عنوان راننده {{RequesterModel.vehicleOwnerType}} {{RequesterModel.vehicleType}} تحت پوشش آژانس {{RequesterModel.agancy}} مشغول به کار بوده اند و در
+                    حال حاضر هیچ گونه فعالیتی در سیستم حمل و نقل درون شهری ندارند. این گواهی بنا به در خواست نامبرده
+                    صادر گردیده و فاقد اعتبار دیگری می باشد. 
+                </p>
+            </div>
+            <div class="rows">
+                <p style="text-align: left;">امضا</p>
+            </div>
+
+
+            <button class="btn btn-default" onclick="print1()">صدور گواهی موقت</button>
+
+            <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+            <script>
+                function print1() {
+                    $("#printForm").show();
+                    printJS({ printable: 'printForm', type: 'html', css: ['./styles/print2.css'] });
+                    $("#printForm").hide();
+
+                }
+
+            </script>
+
+        </div>
+
+</form>
